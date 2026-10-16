@@ -1,0 +1,6 @@
+# 仓库内文本一律 LF，任何平台检出也保持 LF（Windows/macOS/Overleaf 一致），
+# 避免换行符来回翻转污染 diff。二进制文件不受影响。
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
