@@ -1,0 +1,8 @@
+# terms.txt — 经济学术语登记表（2026-10-16 建，规则未敲定，以本头注为准）
+# 收「概念名词」：领域里有什么（adaptation、climate penalty、long differences……）。
+# 暂定格式（TAB 分隔），每行一条：
+#   英文原词<TAB>中文定译<TAB>一句话界定（可空）
+# 来源：各章定义处的 \index；行文用词以本表为准。
+# 与 expression.txt 的分界（暂定）：terms 记概念，expression 记论证构件。
+# 拿不准先登记进较合适的一份并加行尾 ? 标记，规则定稿时统一归类；
+# 不要因为分界拿不准就不登记。

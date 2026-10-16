@@ -1,0 +1,15 @@
+# LaTeX 编译产物不入库（Overleaf 与本地编译各自生成）
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+build/

@@ -1,0 +1,184 @@
+% ===================================================================
+% preamble.tex — 经济学论文精读讲义公共导言
+% 所有章节共享的宏包、TikZ 样式、自定义盒子与记号
+% ===================================================================
+
+% 版心: A4, 每行约 38 个汉字 (出版惯例 28--36, 讲义取上限以兼顾 A4 打印)。
+% 付印装订时: 在下行加 bindingoffset=6mm (内侧留装订量), 并把 openany 改 openright。
+\usepackage[a4paper, hmargin=3.0cm, vmargin=2.6cm]{geometry}
+\usepackage{emptypage}   % openright 产生的空白左页不排页眉页码
+\emergencystretch=1.5em  % 中西文混排偶发的断行困难兜底
+\usepackage[round,authoryear]{natbib}   % 经济学惯例: 作者-年份夹注
+\usepackage[font=small, labelfont=bf, skip=6pt]{caption}
+\usepackage{imakeidx}   % 索引; 须在 hyperref 之前加载
+\makeindex[intoc=true, title=索引]
+
+% ------------------------- 版式约定 -------------------------
+% 章标题沿用 ctexbook 默认（黑体大号居中）；节及以下顶格左对齐、黑体，
+% 落实「黑体标题、宋体正文」的教材惯例（承旧仓 2026-08 定版，见 CONTRIBUTING）。
+\ctexset{
+  section       = {format = \Large\heiti\raggedright},
+  subsection    = {format = \large\heiti\raggedright},
+  subsubsection = {format = \heiti\raggedright},
+  part/pagestyle = empty,   % 部分页不排页码
+}
+% 全书目录只列到节（x.y）；各章更深的导航由「导读地图」承担
+\setcounter{tocdepth}{1}
+% 页眉不将英文转全大写（book 类默认的 \MakeUppercase 在中文页眉里突兀）
+\renewcommand{\chaptermark}[1]{\markboth{\CTEXthechapter\hspace{1em}#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\hspace{1em}#1}}
+% 部分页导语: 在 \part 之前调用 \partintro{...}, 导语会排在该部分页标题下方
+\newcommand{\partintrotext}{}
+\newcommand{\partintro}[1]{\gdef\partintrotext{#1}}
+\ctexset{part/aftertitle = {\par\nobreak\vspace{5\baselineskip}
+  {\centering\begin{minipage}{0.72\textwidth}
+     \normalfont\zihao{-4}\setlength{\parindent}{2em}\partintrotext
+   \end{minipage}\par}
+  \global\let\partintrotext\relax\gdef\partintrotext{}}}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds, calc, shapes.misc, decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+% 代码样式 (贴 Stata/R/Python 代码、命令与配置用)。注意: listings 对中文支持差, 代码内注释请用英文。
+\lstset{basicstyle=\small\ttfamily, backgroundcolor=\color{black!4},
+  frame=single, rulecolor=\color{black!25}, breaklines=true,
+  columns=flexible, keepspaces=true, showstringspaces=false,
+  keywordstyle=\color{blue!60!black}, commentstyle=\color{green!40!black},
+  stringstyle=\color{red!50!black}, xleftmargin=1em, xrightmargin=1em}
+% 章末参考文献: 每章末尾只列本章引用的文献; globalcitecopy 使其同时汇入书末总表
+\usepackage[globalcitecopy]{bibunits}
+\usepackage{xurl}      % 允许长 URL 在任意字符处折行 (参考文献里的长链接会撑破版心)
+\usepackage[colorlinks=true, linkcolor=blue!60!black, citecolor=blue!60!black, urlcolor=blue!50!black]{hyperref}
+\hypersetup{pdftitle={经济学论文精读讲义}, pdfauthor={Sagewood AI Lab, IAH AI Group, Renmin University of China}, pdfsubject={梳理经济学各领域研究脉络：研究方法的发展与重点研究成果的发现}}
+% 孤行寡行惩罚 (段首行落页尾/段尾行落页首)
+\widowpenalty=8000
+\clubpenalty=8000
+
+% ------------------------- 颜色体系 -------------------------
+% 配色取中性语义色, 含义随图赋值 (主线/分支线、方法/发现、处理/对照),
+% 同一张图内同一含义固定同一色; 不预设某种图的专用色。
+\definecolor{cMain}{RGB}{31,119,180}     % 主线/主对象 蓝
+\definecolor{cBranch}{RGB}{255,127,14}   % 分支/被放弃的路线 橙
+\definecolor{cFind}{RGB}{68,138,74}      % 发现/结论 绿
+\definecolor{cAlt}{RGB}{148,103,189}     % 对照/替代路线 紫
+\definecolor{cGray}{RGB}{238,238,238}
+
+% ------------------------- TikZ 样式 -------------------------
+% 常用图形: partinfo 的发展脉络图与时间线、识别策略示意、简单 DAG。
+\tikzset{
+  blk/.style={draw=black!60, rounded corners=2pt, minimum width=2.7cm,
+              minimum height=0.8cm, font=\small, align=center, inner sep=2pt},
+  mainblk/.style={blk, fill=cMain!15},     % 主线上的对象
+  branchblk/.style={blk, fill=cBranch!18}, % 被放弃/被搁置的路线
+  findblk/.style={blk, fill=cFind!14},     % 发现/结论
+  altblk/.style={blk, fill=cAlt!12},       % 对照/替代路线
+  opblk/.style={blk, fill=cGray, minimum width=1.9cm},
+  ar/.style={-{Stealth[length=2mm]}, thick},
+  dar/.style={-{Stealth[length=2mm]}, thick, dashed},  % 弱传承/被搁置的方向
+  lbl/.style={font=\footnotesize\itshape, text=black!70},
+  yr/.style={font=\small\bfseries, text=black!60},     % 时间线上的年份
+}
+
+% ------------------------- 自定义盒子 -------------------------
+% 三类盒子按章编号 (识别要点 2.1、易错点 2.3 …), 三类计数器各自独立。
+% 需被跨章引用的盒子, 在盒内首行放 \label{pit:xxx}, 引用处写「第 2 章的易错点~\ref{pit:xxx}」。
+% 识别要点 (可整体搬用的模型设定、口径与识别设计)
+\newtcolorbox[auto counter, number within=chapter]{ident}[1][]{colback=green!4,
+  colframe=green!45!black, title={\textbf{识别要点~\thetcbcounter}~#1},
+  fonttitle=\small, left=2mm, right=2mm, top=1mm, bottom=1mm, breakable}
+% 易错点
+\newtcolorbox[auto counter, number within=chapter]{pitfall}[1][]{colback=red!4,
+  colframe=red!60!black, title={\textbf{易错点~\thetcbcounter}~#1},
+  fonttitle=\small, left=2mm, right=2mm, top=1mm, bottom=1mm, breakable}
+% 直觉/为什么
+\newtcolorbox[auto counter, number within=chapter]{intuition}[1][]{colback=blue!4,
+  colframe=blue!50!black, title={\textbf{直觉~\thetcbcounter}~#1},
+  fonttitle=\small, left=2mm, right=2mm, top=1mm, bottom=1mm, breakable}
+% 原文对照(备用: 体例是页码/表号随正文与盒标题就近标注, 本盒一般不用)
+\newtcolorbox{origin}[1][]{colback=black!3, colframe=black!40,
+  title={\textbf{原文出处}~#1}, fonttitle=\small, left=2mm, right=2mm,
+  top=1mm, bottom=1mm, breakable}
+
+% 章末参考文献: 每章正文末尾调用 \chapterrefs, 只列本章引用的文献
+\defaultbibliographystyle{plainnat}   % 各章参考文献单元沿用与书末总表相同的样式
+\newcommand{\chapterrefs}{%
+  \putbib[bibs/refs]%
+}
+% 路径相对 main.tex (Overleaf 项目根 = knowledge/ 文件夹); 本地在 knowledge/ 内编译时相同。
+% 章末书目（bibunits）用「本章参考文献」；书末总表另用「参考文献」，见 main.tex 的 \bibname 设置
+\renewcommand{\bibsection}{\section*{本章参考文献}\markright{本章参考文献}}
+
+% 跨章引用: \chref{ch:xxx} -> 「第1章」(无多余空格)
+\newcommand{\chref}[1]{第\ref{#1}章}
+
+% ------------------------- 实验室标识 -------------------------
+% Sagewood AI Lab 主标记: 一片叶, 叶脉画成神经网络。改动请与 brand/ 下的 SVG 保持同步。
+% 坐标沿用 SVG 的 64x64 画布(已翻转 y 轴), 自然尺寸约 22.5mm 高;
+% 换尺寸用可选参数缩放, 如 \sagewoodmark[0.5]。
+\definecolor{sagewood}{HTML}{4F7A5B}
+\definecolor{sagewoodink}{HTML}{20342A}
+\newcommand{\sagewoodmark}[1][1]{%
+  \scalebox{#1}{%
+  \begin{tikzpicture}[x=1pt, y=1pt,
+      swleaf/.style={draw=sagewood, line width=2.6pt, line cap=round, line join=round}]
+    \path[swleaf] (32,58) .. controls (46.5,45.5) and (50,26) .. (32,6)
+                          .. controls (14,26)   and (17.5,45.5) .. (32,58) -- cycle;
+    \path[swleaf] (32,52) -- (32,10);
+    \path[swleaf] (32,19) -- (24.5,24.5);   \path[swleaf] (32,19) -- (39.5,24.5);
+    \path[swleaf] (32,28) -- (24,33.5);     \path[swleaf] (32,28) -- (40,33.5);
+    \path[swleaf] (32,36.5) -- (26,42);     \path[swleaf] (32,36.5) -- (38,42);
+    \foreach \p in {(32,52),(24.5,24.5),(39.5,24.5),(24,33.5),
+                    (40,33.5),(26,42),(38,42),(32,10)}
+      { \fill[sagewood] \p circle (2.9pt); }
+  \end{tikzpicture}}%
+}
+
+% 纯文字字标: 只有 SAGEWOOD / AI LAB 两行, 不含叶形标记。
+% 用于同一页已出现过标记的场合(如扉页顶部已有标记时的底部署名),
+% 避免同一符号在一页上重复出现。
+\newcommand{\sagewoodwordmark}[1][1]{%
+  \scalebox{#1}{%
+  \begin{tabular}{@{}c@{}}
+    {\color{sagewoodink}\fontsize{15.5}{15.5}\selectfont S\,A\,G\,E\,W\,O\,O\,D}\\[3pt]
+    {\color{sagewood}\footnotesize A\,I\ \,L\,A\,B}
+  \end{tabular}}%
+}
+
+% 横向组合标识: 标记 + SAGEWOOD + AI LAB。
+% 对应 brand/sagewood-lockup.svg, 但字体随讲义正文, 不会有字体回退问题。
+% 用于扉页署名; 也可用于章末、封底。缩放同上, 如 \sagewoodlockup[0.8]。
+\newcommand{\sagewoodlockup}[1][1]{%
+  \scalebox{#1}{%
+  \begin{tikzpicture}[x=1pt, y=1pt]
+    \node[anchor=west, inner sep=0] (swm) at (0,0) {\sagewoodmark[0.5]};
+    \draw[sagewood!35, line width=0.5pt]
+      ($(swm.east)+(8,-14)$) -- ($(swm.east)+(8,14)$);
+    \node[anchor=west, inner sep=0] at ($(swm.east)+(17,6.5)$)
+      {\color{sagewoodink}\fontsize{15.5}{15.5}\selectfont S\,A\,G\,E\,W\,O\,O\,D};
+    % 中文名暂不启用; 需要时把下一行注释掉、启用再下一行即可
+    \node[anchor=west, inner sep=0] at ($(swm.east)+(17,-8.5)$)
+      {\color{sagewood}\footnotesize A\,I\ \,L\,A\,B};
+    %\node[anchor=west, inner sep=0] at ($(swm.east)+(17,-8.5)$)
+    %  {\color{sagewood}\footnotesize A\,I\ \,L\,A\,B\ \ %
+    %   \color{black!45}· 智林人工智能实验室};
+  \end{tikzpicture}}%
+}
+
+% ------------------------- 数学记号 -------------------------
+% 全书级记号在此登记; 各章可沿用所读论文的原始记号(首用处说明),
+% 新造全书级记号前先查本块避免冲突, 新约定要登记进这里。
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}                            % 期望
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\ind}[1]{\mathbf{1}\!\left\{#1\right\}}    % 示性函数
+\newcommand{\eps}{\varepsilon}                         % 误差项
