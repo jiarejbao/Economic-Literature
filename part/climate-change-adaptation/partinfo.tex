@@ -1,0 +1,62 @@
+% partinfo 章：Climate Change Adaptation 领域的研究脉络（活页章）
+% 建档：2026-10-18；最近更新：2026-10-21
+% 维护纪律：每落地或大改一篇精读章，必须回到本章补定位、改叙事
+%           （CONTRIBUTING「partinfo 维护纪律」）。
+% 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词
+%          （weather、climate、location、panel approach……），
+%          中文仅保留句法成分；定义处随文给中文对照并登记英文 \index。
+% 写作提示（bjr 2026-10-18）：下一批素材先读 papers/01_methods/ 下
+% "climatic econometrics: can the panel approach account for long-run
+% adaptation?" 的笔记，逐条核对本章方法线的模型 terms 与解释 terms。
+
+\chapter{Climate Change Adaptation 研究脉络梳理}
+\label{ch:info-climate-change-adaptation}
+
+本 part 梳理 climate change adaptation 研究的脉络。领域围绕的问题只有一个：climate change 会带来多大损害，经济主体又能通过长期 adaptation 抵消其中多少。本领域随 climate change 议题的兴起而出现；随着 adaptation 成为研究重点，方法重心从「估计影响」移向「检验 adaptation」。发展史按「当时面对什么问题、用什么方法回答、得到了什么发现、遗留了什么问题」登记，被推翻或修正的结论照实收录。
+
+两个全书级的术语区分在这里先立起来（identification 上的含义随精读章展开）。第一，\index{weather}weather（天气）指年际与年内的波动，\index{climate}climate（气候）指 weather 的长期分布：用 weather 波动识别的是 short-run response（不含 long-run adaptation），long-run adaptation 要靠横截面 climatic differences 或 long differences 这类长期变异识别，凡引用识别结论先分清变异来源。第二，\index{adaptation}adaptation（适应）指长期发生的调整（品种、灌溉、种植制度），\index{coping}coping（应对）指短期风险管理（借贷、储蓄、转移），行文不混用。
+
+\section{时间线}
+
+以年份为轴登记方法演进与代表性发现；写「待补」的格子是欠账，对应精读章落地即还（自查：\texttt{grep -n '待补' part/*/partinfo.tex}）。
+
+\begin{itemize}
+  \item \textbf{1994}：Mendelsohn、Nordhaus 与 Shaw 用美国县横截面上的农地价值对 climate 变量回归，开截面 \index{Ricardian}Ricardian 路线 \citep{mendelsohn1994impact}。
+  \item \textbf{2007}：Deschênes 与 Greenstone 把 weather 波动面板（panel approach）引入农业影响评估（county fixed effects 加年际 weather 波动），回应截面路线的遗漏变量批评 \citep{deschenes2007economic}。
+  \item \textbf{2016}：Burke 与 Emerick 用 \index{long differences}long differences（两个长时段均值之差），对比 long-run response 与 panel approach 给出的 short-run response，考察美国农业的 adaptation \citep{burke2016adaptation}。同年 Hsiang 的综述系统整理了 climate econometrics 的各条 identification strategy \citep{hsiang2016climate}。
+  \item \textbf{2021}：Mérel 与 Gammans 把「nonlinear panel approach 的系数在多大程度上反映 long-run adaptation」形式化为可计算的 asymptotic bias 分解问题（\chref{ch:merel-gammans-2021}）。
+  \item 待补：Schlenker 与 Roberts（2009）的非线性温度响应一站；结构外推一站；各点落位后本时间线与「发现线」互相对照修订。
+\end{itemize}
+
+\section{方法线}
+
+本领域实证方法（empirical approaches）的发展是一条「识别什么变异」的线。模型一侧的 terms：\index{panel approach}panel approach、\index{nonlinear panel approach}nonlinear panel approach、\index{fixed effects}fixed effects、county fixed effects；解释一侧的 terms：\index{weather fluctuation}weather fluctuation、\index{climatic differences}climatic differences、\index{climatic adaptation}climatic adaptation。
+
+方法线的当前主线：在 nonlinear panel approach 里，weather 波动（组内变异）识别 short-run response，climatic differences（横截面变异）经由 penalty term 重新进入系数 identification。两侧 terms 的对应关系由 \chref{ch:merel-gammans-2021} 首次给出显式分解。
+
+待补：截面 Ricardian 与 panel approach 之争的方法叙事；long differences 与结构外推两站。
+
+\section{发现线}
+
+待补：本领域已确认的重点结论与量级区间，随各精读章「结果与解释」节落地回填；数字必须带表号（页码）与样本口径。目前已可登记的一条：\chref{ch:merel-gammans-2021} 的摘要报告，对美国与法国的作物单产都找到了 long-run climatic adaptation 的证据。
+
+待补：被推翻或修正的结论（如早期 Ricardian 外推的争议）。
+
+\section{章节速查表}
+
+本表是「章与 partinfo 互指」的锚：每篇精读章一格。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{1.4cm}p{2.8cm}p{3.0cm}p{2.7cm}p{3.2cm}@{}}
+\toprule
+章 & 论文 & 回答的问题 & 方法 & 给领域留下了什么 \\
+\midrule
+\chref{ch:merel-gammans-2021} & Climate Econometrics: Can the Panel Approach Account for Long-Run Adaptation?（AJAE 2021） & nonlinear fixed effects 面板（忽略 penalty term 的二次设定）估计到的系数，在多大程度上能当作 long-run climate response 来读？ & 在 McIntosh 与 Schlenker（2006）框架上做 asymptotic bias 分解（固定 location 数、大 $T$）；美国与法国的作物单产面板上同时估计 long-run / short-run response & 偏差可正可负，由条件于 location 的 weather 数据偏度驱动；无偏度时面板系数是 short-run 与 long-run response 的 convex combination；空间大面板的温度系数已主要反映 long-run response（降水不然） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% 章末参考文献（只列本章引用的条目），勿删
+\chapterrefs

@@ -6,3 +6,22 @@
 # 与 expression.txt 的分界（暂定）：terms 记概念，expression 记论证构件。
 # 拿不准先登记进较合适的一份并加行尾 ? 标记，规则定稿时统一归类；
 # 不要因为分界拿不准就不登记。
+adaptation	适应	长期发生的调整（品种、灌溉、种植制度等）
+coping	应对	短期风险管理（借贷、储蓄、转移）
+weather	天气	年际与年内的波动
+climate	气候	天气的长期分布
+weather fluctuation	天气波动	天气相对其长期均值的年际波动
+climatic differences	气候差异	位置之间气候（长期分布）的差异
+climatic adaptation	气候适应	对本地气候的长期适应
+panel approach	面板法	天气波动面板设计的统称（随 Mérel & Gammans 2021）
+nonlinear panel approach	非线性面板法	天气变量以非线性形式（二次、样条等）进入的面板法
+fixed effects	固定效应
+county fixed effects	县固定效应	县级面板的个体固定效应
+climate penalty	气候惩罚	天气偏离本地气候造成的产出惩罚（随 Mérel & Gammans 2021 用法）
+penalty term	惩罚项	二次设定中的 β3(x_it−μ_i)^2 项
+long differences	长差分	两个长时段均值之差（随 Burke & Emerick 2016）
+short-run response	短期响应	行动集固定为适应于本地气候时，产出对天气实现的依赖
+long-run response	长期响应	全部行动可调整、惩罚为零时，产出对天气的依赖
+Ricardian model	Ricardian 模型	用横截面价值对气候变量回归的截面路线
+asymptotic bias	渐近偏差	T→∞ 时估计量相对目标参数的偏差
+

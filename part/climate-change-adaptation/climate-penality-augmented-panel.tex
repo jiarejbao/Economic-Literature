@@ -1,0 +1,158 @@
+% 精读章: Mérel & Gammans, Climate Econometrics: Can the Panel Approach
+%         Account for Long-Run Adaptation? (AJAE 2021)
+% 原文出处: doi:10.1111/ajae.12200（所据版本：期刊已刊版，AJAE 103(4): 1207--1238；
+%          本仓 papers/01_methods/ 下 PDF 为团队正典，本节页码引注均指该版）
+% 版本注记: 第二节的五条假设原为本章作者依据工作稿第一版（UC Davis ARE,
+%          long-run_effects_in_panel_models_v1）起草；已按已刊版逐条核对改写，
+%          行为推导、公式 (1)(2)、气候惩罚命名与图 1 均以已刊版为准。
+% 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词
+%          （weather、climate、location/locational、climate penalty……），
+%          中文仅保留句法成分；\index 随之登记英文词条。
+% 主笔: bjr；初稿: 2026-10-20
+% partinfo 定位: 把「面板法能否反映长期适应」形式化为可计算的偏差分解，
+%               见 \chref{ch:info-climate-change-adaptation} 的方法线与速查表。
+
+\chapter{Climate Econometrics: Can the Panel Approach Account for Long-Run Adaptation?（Mérel \& Gammans，AJAE 2021）}
+\label{ch:merel-gammans-2021}
+% 章题过长，页眉用短题（preamble 的 \chaptermark 经 \markboth 排页眉）
+\chaptermark{Climate Econometrics（Mérel \& Gammans，2021）}
+
+\section{这篇论文在说什么}
+% 待写：论文一句话概括 + 骨架表（原文章节、页码、讲什么）+ 在 partinfo 里的坐标
+% （体例见 CONTRIBUTING「精读章」；素材可从已刊版引言与摘要起草）。
+
+\section{A Simple Model of Long-Run Climatic Adaptation}
+\label{sec:cca-model}
+
+本节拆解论文第二节。模型的目的不是刻画农户的完整决策问题，而是给「short-run response」与「long-run response」各下一个可操作的定义，使「panel approach 估计到的到底是什么」成为一个可以计算的问题：把忽略 climate penalty 的朴素二次面板模型放到这个 data-generating process 上，就能写出其 fixed effects 估计量相对 long-run 系数的 asymptotic bias（那是论文后续各节的任务，对应本章后续小节，待写）。论文自述这是一个 reduced-form 的 long-run adaptation 模型：行为含义通过 penalty term 进入设定，但行动选择本身不被显式建模。
+
+先交代记号。模型考虑 $i=1,\dots,I$ 个 location（如县）与 $t=1,\dots,T$ 个时期（如年），每个观测有三个要素：产出 $y_{it}$，如对数农场利润（论文原例）或对数单产（论文经验部分用作物单产）；\index{weather}weather $x_{it}$，location $i$ 在时期 $t$ 的实现值，逐年波动；\index{climate}climate $\mu_i$，是该 location 的常数。weather 与 climate 的区分沿用全书约定（\chref{ch:info-climate-change-adaptation}）。
+
+下面是bjr总结的五条假设。已刊版正式编号的假设只有假设 1（第 1210 页），强外生性以「通常的强外生性假设」陈述（第 1214 页）；五条是本讲义对论文第二节的展开，对应关系随文注明。
+
+\textbf{Assumption 1 (Stationary locational climates).} Each location's climate is stationary during the observation period: weather realizations are drawn from a time-invariant distribution centered on the location's climate,
+\begin{equation}
+\E[x_{it} \mid \mu_i] = \mu_i .
+\label{eq:cca-climate}
+\end{equation}
+
+式~\ref{eq:cca-climate} 是论文的假设 1（第 1210 页），weather 是围绕 climate 波动的随机变量，climate 就是 weather 实现的（条件）均值。论文第二节开头即写明考虑「观测期内平稳的 locational climate」，并把可能带趋势 climate 的推广放到在线附录 F（第 1210 页）；论文还注明，除非另作说明，climate 即指 mean weather，更广的意义上 climate 是 weather 的整个分布，不止一阶矩（第 1210 页）。平稳性才支撑住一个关键读法：横截面上 $\mu_i$ 的差异可以被当作长期差异。若样本期内 climate 本身在移动，截面变异里就混入了 climate 趋势本身的影响，而不只是 adaptation 的差异，后文所有基于 $\mu_i$ 的解释都要重讲。
+
+\textbf{Assumption 2 (Quadratic outcome equation with a climate penalty).} The data-generating process (DGP) takes a quadratic form in both climate and weather:
+\begin{equation}
+y_{it} = \alpha_i + \beta_1 x_{it} + \beta_2 x_{it}^2 + \beta_3 (x_{it}-\mu_i)^2 + \eps_{it},
+\label{eq:cca-dgp}
+\end{equation}
+where the penalty term $\beta_3 (x_{it}-\mu_i)^2$ is quadratic in the deviation of realized weather from the location's own climate, with $\beta_3 \le 0$ expected.
+
+式~\ref{eq:cca-dgp} 是论文式 (1) 写成时期 $t$ 的形式（第 1211 页），逐符号看：$\alpha_i$ 是 location fixed effect，吸收土壤、区位等一切不随时间变化的特征；$\beta_1$ 与 $\beta_2$ 是所有 location 共享的 weather 响应参数，$\beta_2<0$ 时响应呈穹形，这是选二次型的一个原因，即允许 weather 与产出之间的关系非单调、非线性（第 1211 页）。$\beta_3(x_{it}-\mu_i)^2$ 是\index{climate penalty}penalty term，$\beta_3\le 0$，$\beta_3=0$ 即没有 climatic adaptation 的情形（第 1211 页）。论文把它命名为「climate penalty」，强调条件于 weather 实现时，构成惩罚的是 climate 而不是 weather 实现本身（第 1213 页）。为什么 penalty 取二次的偏差形式（原已填充的疑问句保留在这里作讨论题）：论文给的行为读法是，条件于 weather，对这场 weather「习以为常」的 location，因为其 climate 更接近它，已经有过更多适应它的机会，所以处境更好，例如炎热 climate 的 location 比凉爽 climate 的 location 更适应高温（第 1213 页）。二次型的另一个含义是只惩罚距离、不惩罚方向，这个限制的代价见易错点~\ref{pit:cca-mu}。
+
+先算一个例子给读者看。设甲县 climate 偏冷 $\mu=16\,^\circ$C，乙县 climate 偏热 $\mu=24\,^\circ$C，penalty 系数取 $\beta_3=-0.01$（对数产出的示意参数，为本讲义自设，不是原文数字）。生长季平均温度实现 $x=21\,^\circ$C 时：甲县 penalty $-0.01\times(21-16)^2=-0.25$ 个对数点，乙县 penalty $-0.01\times(21-24)^2=-0.09$ 个对数点。同一场 weather，climate 更接近它的乙县损失更小。把 weather 换成 $x=19\,^\circ$C 再算一遍：甲县 $-0.01\times(19-16)^2=-0.09$，乙县 $-0.01\times(19-24)^2=-0.25$，损失恰好对调。这个两县例子在后面讲偏差方向时还要用。
+
+\begin{intuition}[一年的干旱与干旱的 climate]
+短期与长期的差别不在「是否理性」，而在可调用 adaptation 通道集的大小。论文举了两个例子（第 1212 页）：一年的干旱不值得为此修建灌渠，但在干旱的 climate 里，修灌渠可能是值得的；异常热浪不值得为此安装整套空调系统，但值得买一台风扇 \citep{auffhammer2014empirical}。其背后的假定是：长期投入（灌渠、空调系统）只对 climate 响应，资本短期固定、长期可变，同一函数形式里由 penalty term 体现。
+\end{intuition}
+
+\textbf{Assumption 3 (Optimizing agents).} In each location, economic agents choose a set of actions $\xi_i \in \mathbb{R}^L$ (crop varieties, planting dates, irrigation, and the like) so as to achieve maximized expected outcomes given their climate $\mu_i$.
+
+% 备注（bjr）：原稿本条写作 $\kercy_i$（未定义命令），论文原用记号为 $\xi_i$，已订正。
+$\xi_i$ 是 location $i$ 的 adaptation 行动集。这一条不是凭空补的行为故事，论文在单期（时期 1）内把它推了出来（第 1211 页）。产出由函数 $\phi_i$ 给出：
+\begin{equation*}
+y_{i1} = \phi_i(x_{i1}, \xi_i, \eps_{i1}) ,
+\end{equation*}
+其中行动下标只有 $i$ 没有 $t$：行动不针对逐年 weather 调整，论文的读法是行动针对 climate 而设（「committed actions」，第 1211 页）。设 $\phi_i$ 的形式为
+\begin{equation*}
+\phi_i(x_{i1}, \xi_i, \eps_{i1}) = \alpha_i + \beta_1 x_{i1} + \beta_2 x_{i1}^2 + \beta_3 \bigl(x_{i1} - \omega_i(\xi_i)\bigr)^2 + \eps_{i1} ,
+\end{equation*}
+其中 $\omega_i:\R^L \to X_i$ 为满射。条件于 weather $x_{i1}$，产出当且仅当 $\omega_i(\xi_i)=x_{i1}$ 时最大。经济主体选 $\xi_i$ 以最大化期望产出：
+\begin{align*}
+\xi_i &\in \operatorname{argmax}_{\xi} \E[\phi_i(x_{i1}, \xi, \eps_{i1})]
+= \operatorname{argmin}_{\xi} \E\bigl[(x_{i1}-\omega_i(\xi))^2\bigr] \\
+&= \operatorname{argmin}_{\xi} \E\bigl[(x_{i1}-\mu_i+\mu_i-\omega_i(\xi))^2\bigr]
+= \omega_i^{-1}\bigl(\{\mu_i\}\bigr) .
+\end{align*}
+交叉项 $2\,\E[x_{i1}-\mu_i]\,(\mu_i-\omega_i(\xi))$ 期望为零，用的正是假设 1（weather 围绕 climate 波动）；于是最优行动使 $\omega_i(\xi_i)=\mu_i$，代回 $\phi_i$ 就得到简化式 DGP，即式~\ref{eq:cca-dgp}（论文式 (1)，第 1211 页）。这段推导把假设 1、本条假设与式~\ref{eq:cca-dgp} 连成一体：penalty term 不是额外添加的回归项，而是「行动选来对付 $\mu_i$」这一行为假设的直接后果。论文并注明式~\ref{eq:cca-dgp} 与 McIntosh 和 Schlenker（2006）提出的模型相同 \citep{mcintosh2006identifying}。论文还指出式~\ref{eq:cca-dgp} 容许一个更结构化的读法（第 1212 页）：在 Schlenker（2017）的品种选择框架里，$\beta_3$ 可以依赖一个内生选择的品种指数 $\gamma_i$，农民依据 climate 均值与其方差选品种，penalty term 中 $\gamma_i$ 取代 $\mu_i$，此时 penalty 的最低点未必落在 $\mu_i$；Schlenker 发现这层灵活性对美国玉米产量的长期系数估计没有实质改变 \citep{schlenker2017interannual}。
+
+\textbf{Assumption 4 (Long run: all actions adjustable).} Maximized expected outcomes can be achieved in the long run, when all actions can be varied in response to changes in environmental conditions. In the long run, the penalty vanishes and the expected outcome becomes
+\begin{equation}
+\E[y_{it}^{\mathrm{LR}} \mid \alpha_i, x] = \alpha_i + \beta_1 x + \beta_2 x^2 ,
+\label{eq:cca-lr}
+\end{equation}
+
+式~\ref{eq:cca-lr} 定义\index{long-run response}long-run response（第 1211 页），其中没有 penalty term，全部 adaptation 已经到位。要点有二。其一，long-run response 在数据里观测不到：行动 $\xi_i$ 不随逐年 weather 调整，每个观测只是某条 short-run response 曲线上的一个点（第 1211 页）。其二，long-run 系数 $\boldsymbol{\beta}^{\mathrm{LR}}=(\beta_1,\beta_2)$ 是论文当作基准的参照对象：评估 climate change 的净影响时，关心的正是这个 long-run 关系（第 1214 页）。
+
+\textbf{Assumption 5 (Short run: Behaviour channel only).} Conditional on realised weather, the only way that climate may affect observed short-run outcomes is through the behavioural channel: in the short run, agents have adapted to their own climate $\mu_i$, and the outcome therefore embeds the penalty
+\begin{equation}
+\E[y_{it}^{\mathrm{SR}} \mid \alpha_i, \mu_i, x] = \alpha_i + \beta_1 x + \beta_2 x^2 + \beta_3 (x-\mu_i)^2 .
+\label{eq:cca-sr}
+\end{equation}
+
+式~\ref{eq:cca-sr} 定义\index{short-run response}short-run response（第 1211 页）。论文的原话与这条假设几乎逐字对应：模型中 climate 影响已实现 weather 下观测结果的理由只有一个，即 behavioral channel，climate 影响的是主体的既定行动（第 1211 页）。identification 前提也在这里一并写明：论文在转入估计前采用通常的强外生性假设以保证 fixed effects 估计的一致性，并注明只要 location climate 平稳，weather 方差 $\E[(x_{it}-\mu_i)^2]$ 便不随时间改变（第 1214 页）。若强外生性不成立，例如 weather 实现本身通过政策反应影响产出，组内估计量连 short-run response 都测不准；注意这是 panel approach 自身的 identification 前提，与「它能否反映 long-run adaptation」是两个独立的问题。
+
+\begin{ident}[带 climate penalty 的二次面板：可整体搬用的设定]
+\begin{align*}
+\text{DGP：}\quad & y_{it} = \alpha_i + \beta_1 x_{it} + \beta_2 x_{it}^2 + \beta_3 (x_{it}-\mu_i)^2 + \eps_{it}, \qquad \beta_3 \le 0 \\
+\text{long-run response：}\quad & \E[y_{it}^{\mathrm{LR}} \mid \alpha_i, x] = \alpha_i + \beta_1 x + \beta_2 x^2 \\
+\text{short-run response：}\quad & \E[y_{it}^{\mathrm{SR}} \mid \alpha_i, \mu_i, x] = \alpha_i + \beta_1 x + \beta_2 x^2 + \beta_3 (x-\mu_i)^2 \\
+\text{identification：}\quad & \E[\eps_{it} \mid \alpha_i, \mu_i, x_{i1}, \dots, x_{iT}] = 0
+\end{align*}
+配套的口径要求：climate $\mu_i$ 取 weather 的长期均值且样本期内不变；penalty term 以「weather 对本 location climate 的偏差」为自变量，与 weather 本身的三项（截距、一次、二次）并存。
+\end{ident}
+
+\textbf{climate 如何重新进入 identification。}
+论文式 (2)（第 1213 页）把 penalty term 展开、按 $\beta_3$ 的贡献归堆：
+\begin{equation*}
+y_{it} = \underbrace{\alpha_i + \beta_3 \mu_i^2}_{\text{截距}} + \underbrace{\beta_1 x_{it}}_{\text{斜率}} + \underbrace{(\beta_2+\beta_3)\, x_{it}^2}_{\text{曲率}} + \underbrace{(-2\beta_3)\, \mu_i x_{it}}_{\text{交互}} + \eps_{it} .
+\end{equation*}
+在单个 location 内部，penalty term 恰好是 $x_{it}$、$x_{it}^2$ 与常数项的线性组合，组内变异无法把它与 weather 项分开，也就是说 $\beta_3$ 无法由任何一个 location 的组内变异单独识别。climate $\mu_i$ 的作用是改写每个 location 的截距、组内斜率与曲率，而 fixed effect 把截距项 $\alpha_i+\beta_3\mu_i^2$ 当作常数吸收，论文脚注特别提醒这个被吸收的项随 climate 改变（第 1213 页脚注 14）。于是横截面上的 climatic differences 经由交互通道重新进入系数 identification，这正是论文要量化的事：朴素面板模型（漏掉 penalty term）得到的组内系数，究竟偏向 long-run 值多少。论文随后算出一个直接后果：把式 (2) 当成真模型去做反事实计算，长期效应会被算错（第 1213 页）。偏差公式见论文后续各节（本章后续小节待写）。
+
+\begin{pitfall}[把 climate 均值当成暴露度的完备刻画]
+\label{pit:cca-mu}
+论文自己列出式~\ref{eq:cca-dgp} 的两个限制，转述与解释系数时不可丢掉。其一，penalty 只看绝对距离、不看方向（第 1213 页）：上面两县例子里，$x=21\,^\circ$C 对乙县的 3$^\circ$C 偏差与 $x=19\,^\circ$C 对甲县的 3$^\circ$C 偏差被同等对待；论文自带的例子是冷热两个 location 都暴露在两 climate 均值的 weather 下，penalty 相同。若冷偏离与热偏离的后果不对称，二次 penalty 就把两种后果压平了。其二，均值未必是 adaptation 所对准的基准（工作稿第一版第 5 页）：若某 location 的 climate 分布双峰（极热年与极冷年交替），climate 均值 $\mu_i$ 对 adaptation 的刻画能力很弱。误用的形态是把「对均值的偏离」当成「对实际暴露的偏离」来解释 penalty term 系数。
+\end{pitfall}
+
+图~\ref{fig:cca-lrsr} 依据已刊版图 1 重绘。取 $\beta_3<0$ 的情形，long-run response 呈穹形；每个 location 的 short-run response 曲线在自己的 climate $\mu_i$ 处与 long-run response 相切，因为 $x=\mu_i$ 时 penalty 恰为零、两条曲线的斜率也在此相等（第 1211 页）。这样的纵向缩放下（各 location $\alpha_i$ 画成相同），long-run response 恰是 short-run response 曲线族的上包络（第 1211 页）。原图还在各 location 的 short-run response 曲线附近画了样本数据点与误差箭头，重绘从略。weather 离本地 climate 越远，虚线沉得越深：short-run response 对「不熟悉的 weather」更敏感。「朴素面板模型拟合出的曲线落在 long-run response 与 short-run response 之间的哪里」，就是这条几何图景提出、论文后续各节回答的问题。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=0.82\textwidth, height=6.4cm,
+        xlabel={weather $x$}, ylabel={期望产出 $y$},
+        axis lines=left,
+        xmin=0, xmax=4.4, ymin=-2.4, ymax=5.2,
+        xtick={1,2,3}, xticklabels={$\mu_1$,$\mu_2$,$\mu_3$},
+        ytick=\empty,
+        tick label style={font=\small},
+        label style={font=\small},
+        legend pos=north east,
+        legend style={font=\small, draw=none, fill=none},
+        samples=120]
+      \addplot[cMain, very thick, domain=0:4] {4*x - x^2};
+      \addlegendentry{long-run response（式~\ref{eq:cca-lr}）}
+      \addplot[cBranch, thick, dashed, domain=0:3.15] {4*x - x^2 - (x-1)^2};
+      \addlegendentry{short-run response（式~\ref{eq:cca-sr}）}
+      \addplot[cBranch, thick, dashed, domain=0.25:3.75] {4*x - x^2 - (x-2)^2};
+      \addplot[cBranch, thick, dashed, domain=1.05:4] {4*x - x^2 - (x-3)^2};
+      \addplot[only marks, mark=*, mark size=1.7pt, black]
+        coordinates {(1,3) (2,4) (3,3)};
+      \node[lbl, anchor=south] at (axis cs:2,4.15) {切点：$x=\mu_i$ 处 penalty 为零};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{long-run response 与三个 location 的 short-run response（依据 Mérel 与 Gammans（2021）已刊版图~1 重绘；原图另含样本数据点与误差箭头，此处从略）。参数为本讲义自选（$\beta_1=4$、$\beta_2=-1$、$\beta_3=-1$、各 location $\alpha_i$ 相同），只示意曲线形状与切点位置。$\beta_3<0$ 时 long-run response 呈穹形，且为 short-run response 曲线族的上包络；每个 location 的 short-run response 在其 climate $\mu_i$ 处与 long-run response 相切，weather 离本地 climate 越远，short-run 产出相对长期基准的 penalty 越重。若各 location $\alpha_i$ 不同，全部曲线竖直平移，切点位置不变（第 1211 页）。}
+  \label{fig:cca-lrsr}
+\end{figure}
+
+本节简化模型的结论自带适用范围：式~\ref{eq:cca-dgp} 是论文为可解析性选定的特定函数形式，「偏差由偏度驱动」「convex combination」这些结论都是在它之上推出来的，换别的非线性设定是否仍有同型结论，论文在一般性与经验部分另行讨论（本章后续小节待写）。两县例子（$\mu=16\,^\circ$C 与 $\mu=24\,^\circ$C）后续小节继续沿用。
+
+% ---- 体例提示（后续小节按 CONTRIBUTING「精读章」补齐，勿改已有节序）----
+% \section{预备知识}
+% \section{数据与测度}
+% \section{模型设定与识别策略}
+% \section{结果与解释}
+% \section{机制与讨论}
+% \section{局限与批评}
+% \section{在本领域脉络中的位置}
+
+% 章末参考文献（只列本章引用的条目），勿删
+\chapterrefs

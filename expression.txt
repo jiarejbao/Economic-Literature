@@ -6,3 +6,9 @@
 # 与 terms.txt 的分界（暂定）：terms 记概念，expression 记论证构件。
 # 拿不准先登记进较合适的一份并加行尾 ? 标记，规则定稿时统一归类；
 # 不要因为分界拿不准就不登记。
+assumption	假设	模型前提，逐条编号陈述，并讨论不成立时系数被解释成什么
+identification strategy	识别策略	声称的因果结论所依赖的变异来源与前提
+reduced form	简化式	不显式建模决策过程的回归设定 ?
+convex combination	凸组合	权重非负且和为一的加权平均，用于陈述估计量的构成 ?
+data-generating process	数据生成过程	陈述 DGP 假设时用，缩写 DGP
+

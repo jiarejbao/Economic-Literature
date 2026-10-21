@@ -1,0 +1,48 @@
+% ===================================================================
+% main.tex — 《经济学论文精读讲义》主文件
+% 编译：XeLaTeX（中文 ctex 依赖；Overleaf 项目 Menu 中选 XeLaTeX，
+%       TeX Live 版本按项目设置固定，见 CONTRIBUTING.md「编译与 Overleaf 对接」）
+% 结构：\part = 经济学领域，\chapter = 一篇论文／一段领域史／一种计量方法；
+%       每个 part 的第一章固定是 partinfo 章；每个 \part 前用 \partintro 写导语。
+% ===================================================================
+\documentclass{ctexbook}
+
+\input{preamble}
+
+% 书末总参考文献的标题（各章末文献表的标题「本章参考文献」在 preamble.tex 设置）
+\renewcommand{\bibname}{参考文献}
+
+\title{经济学论文精读讲义}
+
+\author{bjr}
+
+\begin{document}
+
+% 按章分文献单元：各章末的 \chapterrefs（\putbib）只列本章引用
+% （bibunits 要求在 \begin{document} 之后启用；见其手册 §3.2）
+\bibliographyunit[\chapter]
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+
+% ============================== 气候变化适应 ==============================
+\partintro{本部分梳理 climate change adaptation 研究的脉络：climate 影响的估计方法如何
+从截面 Ricardian 模型走到 weather 波动面板（panel approach），再到对「panel approach
+能否反映 long-run adaptation」的系统检验。建议先读 partinfo 章把握脉络，再进各篇精读章
+拆解 identification strategy。}
+\part{气候变化适应}
+\label{part:cca}
+
+\include{part/climate-change-adaptation/partinfo}
+\include{part/climate-change-adaptation/climate-penality-augmented-panel}
+
+% 书末总参考文献：先关闭按章分单元（bibunits 手册 §3.3），
+% globalcitecopy 选项已把各章引用汇入此表
+\bibliographyunit
+\bibliographystyle{plainnat}
+\bibliography{bibs/refs}
+
+\end{document}
