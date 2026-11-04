@@ -1,20 +1,24 @@
 % partinfo 章：Climate Change Adaptation 领域的研究脉络（活页章）
-% 建档：2026-10-18；最近更新：2026-10-21
+% 建档/更新日期由章首 \chdate 渲染（grep: chdate）
 % 维护纪律：每落地或大改一篇精读章，必须回到本章补定位、改叙事
 %           （CONTRIBUTING「partinfo 维护纪律」）。
 % 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词
 %          （weather、climate、location、panel approach……），
 %          中文仅保留句法成分；定义处随文给中文对照并登记英文 \index。
-% 写作提示（bjr 2026-10-18）：下一批素材先读 papers/01_methods/ 下
-% "climatic econometrics: can the panel approach account for long-run
-% adaptation?" 的笔记，逐条核对本章方法线的模型 terms 与解释 terms。
+% 方法线核对（bjr 2026-10-18 提出，2026-11-04 扩展）：方法线按四篇正典
+%          papers/01_methods/ 下的原文逐站核对重写——deschenes2007economic、
+%          burke2015global、hsiang2016climate（所据 NBER w22181 工作稿版）、
+%          merel2021climate，关键主张照引原句（CONTRIBUTING「原句引用」
+%          2026-10-29 条）；后续改方法线仍须回各正典 PDF 核对页码与版本。
 
 \chapter{Climate Change Adaptation 研究脉络梳理}
 \label{ch:info-climate-change-adaptation}
+\chdate{2026-10-18}{2026-11-04}
 
 本 part 梳理 climate change adaptation 研究的脉络。领域围绕的问题只有一个：climate change 会带来多大损害，经济主体又能通过长期 adaptation 抵消其中多少。本领域随 climate change 议题的兴起而出现；随着 adaptation 成为研究重点，方法重心从「估计影响」移向「检验 adaptation」。发展史按「当时面对什么问题、用什么方法回答、得到了什么发现、遗留了什么问题」登记，被推翻或修正的结论照实收录。
 
-两个全书级的术语区分在这里先立起来（identification 上的含义随精读章展开）。第一，\index{weather}weather（天气）指年际与年内的波动，\index{climate}climate（气候）指 weather 的长期分布：用 weather 波动识别的是 short-run response（不含 long-run adaptation），long-run adaptation 要靠横截面 climatic differences 或 long differences 这类长期变异识别，凡引用识别结论先分清变异来源。第二，\index{adaptation}adaptation（适应）指长期发生的调整（品种、灌溉、种植制度），\index{coping}coping（应对）指短期风险管理（借贷、储蓄、转移），行文不混用。
+
+本 part 的两个术语区分在这里先立起来（identification 上的含义随精读章展开）。第一，\index{weather}weather（天气）指年际与年内的波动，\index{climate}climate（气候）指 weather 的长期分布：用 weather 波动识别的是 short-run response（不含 long-run adaptation），long-run adaptation 要靠横截面 climatic differences 或 long differences 这类长期变异识别，凡引用识别结论先分清变异来源。第二，\index{adaptation}adaptation（适应）指长期发生的调整（品种、灌溉、种植制度），\index{coping}coping（应对）指短期风险管理（借贷、储蓄、转移），行文不混用。
 
 \section{时间线}
 
@@ -22,25 +26,34 @@
 
 \begin{itemize}
   \item \textbf{1994}：Mendelsohn、Nordhaus 与 Shaw 用美国县横截面上的农地价值对 climate 变量回归，开截面 \index{Ricardian}Ricardian 路线 \citep{mendelsohn1994impact}。
-  \item \textbf{2007}：Deschênes 与 Greenstone 把 weather 波动面板（panel approach）引入农业影响评估（county fixed effects 加年际 weather 波动），回应截面路线的遗漏变量批评 \citep{deschenes2007economic}。
-  \item \textbf{2016}：Burke 与 Emerick 用 \index{long differences}long differences（两个长时段均值之差），对比 long-run response 与 panel approach 给出的 short-run response，考察美国农业的 adaptation \citep{burke2016adaptation}。同年 Hsiang 的综述系统整理了 climate econometrics 的各条 identification strategy \citep{hsiang2016climate}。
+  \item \textbf{2007}：Deschênes 与 Greenstone 把 weather 波动面板（panel approach）引入农业影响评估（county fixed effects 加年际 weather 波动），回应截面路线的遗漏变量批评 \citep{deschenes2007economic}（\chref{ch:deschenes-greenstone-2007}）。
+  \item \textbf{2015}：Burke、Hsiang 与 Miguel 用 166 国 1960--2010 年度面板估计温度对经济产出的 nonlinear effect，响应在年均 13~$^\circ$C 处最优 \citep{burke2015global}（\chref{ch:burke-hsiang-miguel-2015}）；此后 quadratic 设定在面板文献中渐成常见选择（见 \citealp[第~1214 页脚注~15]{merel2021climate} 的整理）。
+  \item \textbf{2016}：Burke 与 Emerick 用 \index{long differences}long differences（两个长时段均值之差），对比 long-run response 与 panel approach 给出的 short-run response，考察美国农业的 adaptation \citep{burke2016adaptation}。同年 Hsiang 的综述系统整理了 climate econometrics 的各条 identification strategy \citep{hsiang2016climate}（\chref{ch:hsiang-2016}）。
   \item \textbf{2021}：Mérel 与 Gammans 把「nonlinear panel approach 的系数在多大程度上反映 long-run adaptation」形式化为可计算的 asymptotic bias 分解问题（\chref{ch:merel-gammans-2021}）。
   \item 待补：Schlenker 与 Roberts（2009）的非线性温度响应一站；结构外推一站；各点落位后本时间线与「发现线」互相对照修订。
 \end{itemize}
 
 \section{方法线}
 
-本领域实证方法（empirical approaches）的发展是一条「识别什么变异」的线。模型一侧的 terms：\index{panel approach}panel approach、\index{nonlinear panel approach}nonlinear panel approach、\index{fixed effects}fixed effects、county fixed effects；解释一侧的 terms：\index{weather fluctuation}weather fluctuation、\index{climatic differences}climatic differences、\index{climatic adaptation}climatic adaptation。
+方法线按「上一代方法解决不了什么问题，下一代用什么变异回答」登记；各站的关键主张尽量照引原文原句（CONTRIBUTING「原句引用」），页码为所据版本页码（Hsiang 2016 所据为 NBER 工作稿版，见本章参考文献注）。
 
-方法线的当前主线：在 nonlinear panel approach 里，weather 波动（组内变异）识别 short-run response，climatic differences（横截面变异）经由 penalty term 重新进入系数 identification。两侧 terms 的对应关系由 \chref{ch:merel-gammans-2021} 首次给出显式分解。
+第一站是截面路线（Ricardian，1994，见时间线）：用横截面上的农地价值对 climate 变量回归。\index{cross-sectional approach}Cross-sectional approach（截面法）的长处，\citet{hsiang2016climate} 的概括是：长期居住于一地的农民深知本地 climate 并据此调整投资与管理，``farm prices can be assumed to reflect all direct effects as well as all belief effects''（第~5 页；\index{direct effect}direct effects（直接效应）指 climate 经由 weather 实现的直接影响，\index{belief effect}belief effects（信念效应）指主体因相信本地气候如此而做的调整，即 adaptation 行为，区分随 Hsiang 2016）。其软肋是遗漏变量：``A weakness of the cross-sectional approach is its vulnerability to omitted variables bias''，且 ``an econometrician can never be certain their model is unbiased''（第~5 页）。\citet{deschenes2007economic} 用数据坐实了这一软肋：同一 hedonic 设定下，估计值对控制变量、样本与加权的微小选择极其敏感，``it produces estimates that are extremely sensitive to seemingly minor choices about control variables, sample, and weighting''（第~354 页）。
 
-待补：截面 Ricardian 与 panel approach 之争的方法叙事；long differences 与结构外推两站。
+第二站是 \index{panel approach}panel approach（面板法）的引入（2007，\chref{ch:deschenes-greenstone-2007}）。\citet{deschenes2007economic} 的设计陈述是 ``This paper's idea is to exploit the presumably random year-to-year variation in temperature and precipitation to estimate whether agricultural profits are higher or lower in years that are warmer and wetter''，估计 ``These data are used to estimate the effect of weather on agricultural profits and yields, conditional on county and state by year fixed effects''（第~355 页；此思路本身可追溯到 Huntington 1922，考据见 \citealp[第~6--7 页]{hsiang2016climate}）。它回应的正是第一站的遗漏变量批评：``The core benefit of this approach is that it accounts for unobservable differences between units, eliminating a potential source of omitted variables bias''（\citealp[第~7 页]{hsiang2016climate}）。变异来源换成逐年 \index{weather fluctuation}weather fluctuation（天气波动）后，两重局限随即显形，且都是 D-G 自己写明的。其一，climate 信息进不了模型：``Second, it is impossible to estimate the effect of the long-run climate averages in a model with county fixed effects, because there is no temporal variation in $\widetilde{W}_{tc}$''（第~367 页；$\widetilde{W}_{tc}$ 为气候 normals，即各县的长期气候变量——\citet{merel2021climate} 第~1207 页脚注所引即此句）。其二，面板估计到的就是不含全部 substitution 的 short-run response：``The import for the subsequent analysis is that our estimates of the impact of climate change may be downward biased, relative to the preferred long-run effect that allows for all economic substitutions''（第~359 页）——这句自认是后来 adaptation 批评的源头。
+
+第三站是 \index{nonlinear panel approach}nonlinear panel approach（非线性面板法，weather 变量以二次项等非线性形式进入面板），代表应用是 \chref{ch:burke-hsiang-miguel-2015}。\citet{burke2015global} 用 166 国 1960--2010 年度面板，``comparing a country to itself in years when it is exposed to warmer- versus cooler-than-average temperatures due to naturally occurring stochastic atmospheric changes''（第~236 页），配二次温度项，得到 ``country-level economic production is smooth, non-linear, and concave in temperature (Fig.~2a), with a maximum at 13~$^\circ$C''（第~236 页）。这一步改变了 identification 的变异构成——非线性项与 \index{fixed effects}fixed effects 的交互使横截面 \index{climatic differences}climatic differences（气候差异）重新进入模型识别——由此形成 \citet{merel2021climate} 整理的 proposition（命题）：``Including nonlinearities in explanatory weather variables in a fixed-effects panel regression allows cross-sectional weather variation to enter model identification, suggesting that the estimates obtained from a nonlinear panel model at least partially reflect long-run adaptation to climate''（第~1208 页）。该 proposition 在 2021 年前已被多项研究谨慎承认（名单见同页脚注~1，其中有 \citealp{mcintosh2006identifying} 与 \citealp{burke2015global}），但它只回答了「估计里有没有长期成分」：``the extent to which nonlinear panel estimates should be thought of as inclusive of climate adaptation remains unclear''（第~1208 页）。
+
+第四站（2016，\chref{ch:hsiang-2016}）把这场争论正式化。\citet{hsiang2016climate} 的出发点是 ``a debate as to whether regressions on `weather' variables provide meaningful insight into the effects of climate''，他给出 ``conditions under which the use of weather variables in regressions is justified and, perhaps surprisingly, dominates traditionally preferred methods''（第~2 页），并把领域整理成三种 research designs：``cross-sectional approaches, use of time-series variation, and a hybrid known as `long differences'''（第~5 页）。面板之外的同题路线 \index{long differences}long differences（长差分；2016，见时间线）由此获得方法定位：``An approach that aims to compromise between the strengths and weaknesses of cross-sectional analysis and time series identification is the long differences strategy, where changes for both the outcome and the climate within locations are correlated across locations''（第~7 页）。他提出两条概念工具。其一，\index{frequency-identification tradeoff}frequency-identification tradeoff（频率—识别权衡）：低频变异可能捕捉 adaptation，但识别可信度随之下降（第~8--9 页）；若 belief effects 主要通过改变 direct effects 起作用，``total effects of climate still may be nearly identified with high-frequency time-series''（第~9 页）。其二，\index{marginal treatment comparability}marginal treatment comparability（边际处理可比性，第~6 页）的部分检验（第~9--10 页）：若三种频率的估计相等（$\hat\beta_{CS}=\hat\beta_{LD}=\hat\beta_{TS}$），weather 边际变化即可当作 climate 边际变化的替代；他在玉米单产面板上实施的结果，除横截面外各频率效应统计上无异（第~10 页）。
+
+第五站由 \chref{ch:merel-gammans-2021} 回答 proposition 悬置的「多少」：在 McIntosh 与 Schlenker（2006）提出的模型框架上（\citealp{mcintosh2006identifying}），把「nonlinear panel estimates 里长期成分占多少」形式化为可计算的 \index{asymptotic bias}asymptotic bias（渐近偏差）分解。其一，``panel estimates from the quadratic weather-outcome relationship can be thought of as a weighted average of the short-run and long-run responses, with the weight on the long-run coefficients increasing with the share of overall weather variation attributable to cross-sectional (i.e., climatic) differences''（第~1209 页）；weather 分布无偏度时为 convex combination（凸组合，第~1209 页），偏差方向由条件于 location 的 weather 分布的 \index{skewness}skewness（偏度）决定，可正可负（第~1209、1215 页）。其二，同一框架反向给出一致估计的路线：在面板中显式加入 \index{climate penalty}climate penalty 项，一次回归同时得到 conditional on climate 的 short-run response、全局 long-run response 与一个 \index{climatic adaptation}climatic adaptation 的正式检验（第~1208、1220--1221 页）；该检验与 long differences 检验同型，``our test of climatic adaptation is implicit in that it relies on the comparison of short-run versus long-run outcome responses''（第~1208 页）。与第四站对照，Mérel 与 Gammans 自陈：``Whereas previous research has already argued that short-run and long-run responses should be identical at the margin whenever the outcome variable is optimized (e.g., Hsiang 2016), our result is both different and more specific''（第~1217 页）——面板估计到的是加权平均，恰在边际处等同只是特例。
+
+与面板路线平行的结构外推一站，以及各方法适用边界的比较，待补；模型 terms 与解释 terms 在这条方法线上的逐条对应与显式分解，见精读章 \chref{ch:merel-gammans-2021}。
 
 \section{发现线}
 
-待补：本领域已确认的重点结论与量级区间，随各精读章「结果与解释」节落地回填；数字必须带表号（页码）与样本口径。目前已可登记的一条：\chref{ch:merel-gammans-2021} 的摘要报告，对美国与法国的作物单产都找到了 long-run climatic adaptation 的证据。
+待补：本领域已确认的重点结论与量级区间，随各精读章「结果与解释」节落地回填；数字必须带表号（页码）与样本口径。目前已可登记三条。其一与其二出自 \chref{ch:merel-gammans-2021}：摘要报告对美国与法国的作物单产都找到了 long-run climatic adaptation 的证据；方法线悬置的「面板系数里长期成分占多少」第一次有了量级回答——生长季平均温度的效应应主要按 long-run response 解读，三个面板的长期权重分别为 98\%、88\%、86\%，生长季降水的效应则含相当大的 short-run 成分，长期权重分别为 41\%、7\%、53\%（Table~2 与正文，第~1225 页；样本口径：美国县面板为 100 度经线以东、不含 Florida 的县，$I=2{,}391$；Corn Belt 三州 Iowa、Illinois、Indiana，$I=293$；法国 department 级面板，$I=88$；三面板均 $T=66$；美国 outcome 为玉米与大豆单产，法国为小麦与大麦单产，第~1224 页）。其三出自 \chref{ch:deschenes-greenstone-2007}：``Using long-run climate change predictions, the preferred estimates indicate that climate change will lead to a \$1.3 billion (2002\$) or 4.0-percent increase in annual agricultural sector profits''（第~356 页，AER 97(1) 已刊版口径），且响应面在预测变化区间内平坦——``all of the response surfaces are flat over the ranges of the predicted changes in degree-days and inches''（第~355 页）。
 
-待补：被推翻或修正的结论（如早期 Ricardian 外推的争议）。
+待补：被推翻或修正的结论（如早期 Ricardian 外推的争议）。已可登记一例：\chref{ch:deschenes-greenstone-2007} 重做 hedonic 估计，``estimates of the benchmark doubling of greenhouse gases on the value of agricultural land range from $-200$ billion (2002\$) to \$320 billion (or $-18$ percent to 29 percent)''（第~357 页），比此前文献记录的区间更宽，结论是 ``Despite its theoretical appeal, we conclude that the hedonic method may be unreliable in this setting''（第~357 页）。
 
 \section{章节速查表}
 
@@ -53,6 +66,9 @@
 \toprule
 章 & 论文 & 回答的问题 & 方法 & 给领域留下了什么 \\
 \midrule
+\chref{ch:deschenes-greenstone-2007} & The Economic Impacts of Climate Change: Evidence from Agricultural Output and Random Fluctuations in Weather（AER 2007） & 年际 weather 波动识别的 climate change 对美国农业利润的影响有多大？hedonic 截面估计是否可靠？ & county 与 state$\times$year fixed effects 下的年际 weather 波动回归（panel approach 的引入） & hedonic 估计对口径选择极敏感、不可靠的重估证据；自认面板估计不含全部 substitution、相对 long-run effect 向下偏（adaptation 批评的源头） \\
+\chref{ch:burke-hsiang-miguel-2015} & Global Non-Linear Effect of Temperature on Economic Production（Nature 2015） & 温度与经济产出在全球国家面板上是否非线性？历史变暖是否诱发了 adaptation？ & 166 国 1960--2010 增长率面板，二次温度项（country FE、year FE、国家二次趋势） & 全球温度—产出响应在 13~$^\circ$C 处最优的非线性证据；「样本期内未见 adaptation」的判断引发后续 adaptation 检验路线 \\
+\chref{ch:hsiang-2016} & Climate Econometrics（ARRE 2016） & weather 回归何时能识别 climate 效应？三种 research designs 如何取舍？ & 方法综述：正式化 weather／climate，整理 cross-section、time-series、long differences 三条路线 & marginal treatment comparability、frequency-identification tradeoff；$\hat\beta_{CS}=\hat\beta_{LD}=\hat\beta_{TS}$ 部分检验（玉米单产应用） \\
 \chref{ch:merel-gammans-2021} & Climate Econometrics: Can the Panel Approach Account for Long-Run Adaptation?（AJAE 2021） & nonlinear fixed effects 面板（忽略 penalty term 的二次设定）估计到的系数，在多大程度上能当作 long-run climate response 来读？ & 在 McIntosh 与 Schlenker（2006）框架上做 asymptotic bias 分解（固定 location 数、大 $T$）；美国与法国的作物单产面板上同时估计 long-run / short-run response & 偏差可正可负，由条件于 location 的 weather 数据偏度驱动；无偏度时面板系数是 short-run 与 long-run response 的 convex combination；空间大面板的温度系数已主要反映 long-run response（降水不然） \\
 \bottomrule
 \end{tabular}

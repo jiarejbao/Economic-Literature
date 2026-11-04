@@ -6,6 +6,9 @@
 # 与 expression.txt 的分界（暂定）：terms 记概念，expression 记论证构件。
 # 拿不准先登记进较合适的一份并加行尾 ? 标记，规则定稿时统一归类；
 # 不要因为分界拿不准就不登记。
+identification
+specification
+
 adaptation	适应	长期发生的调整（品种、灌溉、种植制度等）
 coping	应对	短期风险管理（借贷、储蓄、转移）
 weather	天气	年际与年内的波动
@@ -15,6 +18,8 @@ climatic differences	气候差异	位置之间气候（长期分布）的差异
 climatic adaptation	气候适应	对本地气候的长期适应
 panel approach	面板法	天气波动面板设计的统称（随 Mérel & Gammans 2021）
 nonlinear panel approach	非线性面板法	天气变量以非线性形式（二次、样条等）进入的面板法
+quadratic-in-weather model
+
 fixed effects	固定效应
 county fixed effects	县固定效应	县级面板的个体固定效应
 climate penalty	气候惩罚	天气偏离本地气候造成的产出惩罚（随 Mérel & Gammans 2021 用法）
@@ -25,3 +30,17 @@ long-run response	长期响应	全部行动可调整、惩罚为零时，产出�
 Ricardian model	Ricardian 模型	用横截面价值对气候变量回归的截面路线
 asymptotic bias	渐近偏差	T→∞ 时估计量相对目标参数的偏差
 
+skewness	偏度	条件于 location 的 weather 分布的不对称性，决定面板估计偏差的方向
+cross-sectional approach	截面法	同一时期比较不同 location 的研究设计（随 Hsiang 2016 三分法）
+omitted variables bias	遗漏变量偏差	遗漏与 climate 相关的产出决定因素造成的估计偏差
+direct effect	直接效应	climate 经由 weather 实现对产出的直接影响（随 Hsiang 2016）
+belief effect	信念效应	主体因相信本地气候如此而调整行为带来的影响（随 Hsiang 2016）
+marginal treatment comparability	边际处理可比性	weather 的边际变化与 climate 的边际变化效应相同的假设（随 Hsiang 2016）
+frequency-identification tradeoff	频率—识别权衡	低频变异能捕捉 adaptation 但识别可信度下降的权衡（随 Hsiang 2016）
+weight parameter	权重参数	面板估计中 short-run 与 long-run response 的组合权重 θ 与 λ_i（随 Mérel & Gammans 2021）
+superconsistency	超一致收敛	估计量以更快速度收敛到真值；naive 面板参数随 T→∞ 对 long-run 参数超一致（随 Mérel & Gammans 2021）
+within estimator	组内估计量	用组内去均值变异做 OLS 的固定效应估计量
+
+data-generating process
+convex combination
+preferred estimate

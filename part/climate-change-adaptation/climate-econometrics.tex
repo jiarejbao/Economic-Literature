@@ -1,0 +1,113 @@
+% 精读章: Hsiang, Climate Econometrics (Annual Review of Resource Economics 2016)
+% 原文出处: doi:10.1146/annurev-resource-100815-095343（所据版本：NBER Working
+%          Paper 22181, April 2016——本仓 papers/01_methods/2016-NBER-w22181-*.pdf
+%          为团队正典，本节页码引注均指该 NBER 版；已刊版 ARRE 8: 43--75 并存，
+%          页码不同，引用页码须注明所据版本）
+% 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词，
+%          中文仅保留句法成分；定义处随文给中文对照并登记英文 \index。
+% 建档/更新日期由章首 \chdate 渲染（grep: chdate）
+% 主笔: 待认领；起草: Claude（2026-11-04，bjr 审订前稿）
+% partinfo 定位: 把「weather 回归能否识别 climate 效应」的争论正式化，整理
+%               cross-section／time-series／long differences 三条路线与两条
+%               概念工具（marginal treatment comparability、
+%               frequency-identification tradeoff），见
+%               \chref{ch:info-climate-change-adaptation} 的方法线与速查表。
+
+\chapter{Climate Econometrics（Hsiang，ARRE 2016）}
+\label{ch:hsiang-2016}
+\chdate{2026-11-04}{2026-11-04}
+
+\section{这篇论文在说什么}
+
+一句话概括：这篇综述（\citealp{hsiang2016climate}，所据 NBER w22181 版）把``regressions on `weather' variables''能否识别 climate 效应这个``particularly thorny''的争论正式化（第~2 页），结论是``the use of weather variables in regressions is justified and, perhaps surprisingly, dominates traditionally preferred methods''——在可给出的条件下（第~2 页）；同时整理了 climate econometrics 的三条 research designs 与两件概念工具（frequency-identification tradeoff、marginal treatment comparability 部分检验），并给出 weather 变异恰好识别 climate 效应的充分条件（Envelope 与 Gradient 定理，\S 2.4）。
+
+它在 partinfo 里的坐标：方法线的第四站（\chref{ch:info-climate-change-adaptation}）——把 \chref{ch:deschenes-greenstone-2007} 与 \chref{ch:burke-hsiang-miguel-2015} 两站经验的分歧整理成统一框架；\chref{ch:merel-gammans-2021} 随后自陈与其关系：``our result is both different and more specific''（M-G 第~1217 页）。
+
+骨架表（所据版本：NBER Working Paper 22181；页码为该版页码。§3 之后各节待补读，先列 §3 及摘要承诺的其余主题）：
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}p{4.2cm}p{1.4cm}p{7.4cm}@{}}
+\toprule
+原文章节 & 页码 & 讲什么 \\
+\midrule
+\S 1 Introduction & 2--4 & 1.1 climate 的形式化定义（$\mathbf{C}_{i\tau}$ 对 $\mathbf{c}_{i\tau}$）；1.2 direct/belief 两条作用通道 \\
+\S 2 The Empirical Problem & 4--14 & 2.1 三种 research designs；2.2 frequency-identification tradeoff；2.3 部分检验；2.4 exact identification \\
+\S 3 Measurement of Climate Variables & 15-- & dose-response 函数与气候变量测度创新（图 4：逐日 degree-days、台风风场、teleconnected pixels、rainy days） \\
+\S 4 及以后 & -- & 摘要承诺的主题：气候变量的社会视角参数化、带空间/时间位移的非线性模型、不确定性刻画、adaptation 测度、跨研究比较、外推（待补读） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{预备知识}
+
+三件工具，首用交代来历。其一，因果推断的 Fundamental Problem of Causal Inference（Holland 1986，计量行话）：同一总体不可能在同一时段同时经历 $\mathbf{C}$ 与 $\mathbf{C}+\Delta\mathbf{C}$，故式~\ref{eq:hs-ate} 的处理效应不可直接观测（第~4 页）。其二，\index{envelope theorem}Envelope theorem（包络定理，微观经济学行话）：最优值函数对参数的导数等于目标函数在该参数方向的偏导数——约束在最优点处不产生一阶损失。其三，\index{gradient theorem}Gradient theorem（梯度定理，微积分行话）：沿路径积分梯度可得两点函数值之差。三者都在 \S 2.4 使用（第~11--14 页）。
+
+\section{数据与测度}
+
+综述不依赖单一数据集，本节整理它对「气候变量怎么测」的要点。核心对象是 dose-response 函数 $\E[Y\mid\mathbf{c}] = f(\mathbf{c})$（式 (25)，第~15 页）：早期只用「有无效应」的粗测度（纬度、事件虚拟变量），``coarse climate measures introduce large measurement errors that will cause attenuation bias, leading to under-rejection of the null hypothesis''（第~15 页）。测度创新的方向由其图 4 给出（第~15 页图注）：用逐小时温度插值构造逐日 degree-days（Schlenker \& Roberts 2009）、用风场模型重建台风暴露（Hsiang \& Jina 2014）、识别与 ENSO 强耦合的 teleconnected 像素（Hsiang et al. 2011）、以「下雨天数」刻画年内降水离散度。这一节与 CONTRIBUTING 对本讲义读者的告诫一致：气候变量的口径是跨研究不可比的头号来源。§3 其余内容待补读。
+
+\section{模型设定与识别策略：weather 回归何时识别 climate 效应}
+
+本节是论文的理论贡献，按原文四步走：定义、问题、三种设计的取舍、两个正式结果。
+
+\subsection{第一步：climate 与 weather 的形式化定义}
+
+位置 $i$、时段 $\tau$ 上有一个随机向量 $\mathbf{v}_{i\tau} = \{$temperature, precipitation, humidity,\dots$\}$，它从分布 $\psi(\mathbf{C}_{i\tau})$ 中抽出；刻画该分布的参数向量 $\mathbf{C}_{i\tau}$ 定义为 \index{climate}climate，已实现的分布 $\mathbf{c}_{i\tau}$ 定义为 \index{weather}weather（第~2--3 页）——``Define $\mathbf{C}_{i\tau}$ to be the \emph{climate} at $i$ during $\tau$, since it characterizes the distribution of possible realized states $\mathbf{v}_{it}$''（第~2 页），``we define $\mathbf{c}_{i\tau}$ to be a description of the \emph{weather} during $\tau$''（第~3 页）。本 part 的 weather／climate 区分（\chref{ch:info-climate-change-adaptation}）在计量上对应的就是这一对记号。作者还强调 climate 不必有固定时间尺度（历史上 30 年平均的定义``is fairly arbitrary''，第~3 页）。
+
+climate 影响结果有两条通道：直接效应与信念效应。``the climate during $\tau$ influences what realizations of weather $\mathbf{c}$ actually occur during that interval, which in turn affects a population directly...—call this the `direct effect' of climate. Second, individuals' beliefs over the structure of $\mathbf{C}$ may affect their decisions and resulting outcomes, regardless of what $\mathbf{c}$ is realized (e.g. if people believe their climate is rainy, they will buy umbrellas)—refer to this as the `belief effect'''（第~3 页）。总效应写成 $Y(\mathbf{C}) = Y(\mathbf{c}(\mathbf{C}), \mathbf{b}(\mathbf{C}))$（式 (3)，第~3 页），其梯度按 direct 与 belief 两块分解（式 (4)，第~4 页）；作者注：``interactions between beliefs and direct impacts ... effects themselves are together often referred to as `adaptations' in the literature''（第~4 页）——adaptation 在这个框架里就是 belief 通道的实现方式。
+
+\subsection{第二步：实证问题与两条假设}
+
+目标是气候变化的平均处理效应
+\begin{equation}
+\beta = \E[Y_{i\tau}\mid\mathbf{C}_{i\tau}+\Delta\mathbf{C}, \mathbf{x}_{i\tau}] - \E[Y_{i\tau}\mid\mathbf{C}_{i\tau}, \mathbf{x}_{i\tau}] .
+\label{eq:hs-ate}
+\end{equation}
+理想实验需要两单元同质：$\E[Y_{i\tau}\mid\mathbf{C},\mathbf{x}_{i\tau}] = \E[Y_{j\tau}\mid\mathbf{C},\mathbf{x}_{j\tau}]$，即 \index{unit homogeneity}unit homogeneity assumption（单位同质假设，第~4--5 页）。时间序列路线则把它换弱：\index{marginal treatment comparability}marginal treatment comparability assumption（边际处理可比性，第~6 页）——weather 分布的边际变化 $\mathbf{c}_{i\tau}-\mathbf{C}_1$ 的效应，等于同构的 climate 分布变化 $\Delta\mathbf{C} = \mathbf{C}_2-\mathbf{C}_1$ 的效应（式 (9)，第~6 页）。作者直言这条假设``has been widely debated''，故后文给检验与条件（第~6 页）。
+
+\subsection{第三步：三种 research designs 的取舍}
+
+``There are essentially three research designs in use that approximate the average treatment effect in Eq.~5: cross-sectional approaches, use of time-series variation, and a hybrid known as `long differences'''（第~5 页）。各自的变异与代价：
+
+\textbf{Cross-sectional approach。}同期间跨单元比较（式 (8)）。长处正是隐含的 adaptation 捕捉：``since farmers who inhabit a location for a long period will have a strong grasp of $\mathbf{C}$ at their location and will adjust farm investments and management to optimize based on these beliefs, farm prices can be assumed to reflect all direct effects as well as all belief effects''（第~5 页；此处在原文中即对 Mendelsohn 等 1994 农地价值路线的概括）。短处：``A weakness of the cross-sectional approach is its vulnerability to omitted variables bias''，且``there exists no systematic method for determining whether any key variables are omitted from Eq.~8 and thus an econometrician can never be certain their model is unbiased''（第~5 页）。
+
+\textbf{Time-series（含 panel）approach。}单元自身跨期比较（式 (10)，unit fixed effects 加时期趋势），获得现代地位是在 Deschênes 与 Greenstone（2007）手中：``This approach gained prominence in modern economic analysis when used by Deschênes \& Greenstone (2007), who analyzed whether agricultural profits in US counties responded to `random fluctuations in weather'''（第~7 页；更早可追溯至 Huntington 1922 的工厂工人数据设想，第~6--7 页）。长处：``The core benefit of this approach is that it accounts for unobservable differences between units, eliminating a potential source of omitted variables bias''（第~7 页）。短处：仍可能漏掉随时间变化的共同冲击（作者举 ENSO 同时调制温度、降水与飓风，第~7 页）。
+
+\textbf{\index{long differences}Long differences。}跨单元比较长时段变化（式 (11)），定位是折中：``An approach that aims to compromise between the strengths and weaknesses of cross-sectional analysis and time series identification is the long differences strategy, where changes for both the outcome and the climate within locations are correlated across locations''（第~7 页）；已实施的研究``found that $\hat\beta_{LD}$ is almost identical to $\hat\beta_{TS}$, leading them to conclude that gradual changes in $\mathbf{c}$ likely induce similar effects to more rapid changes in $\mathbf{c}$''（第~8 页，指 Dell et al. 2012、Burke \& Emerick、Lobell \& Asner 2003、Burke et al. 2015b 等的应用）。
+
+\subsection{第四步：两个正式结果}
+
+\textbf{结果一：frequency-identification tradeoff。}信念效应只对低频变异起作用——经历一分钟的天气不会让人更新对气候的信念——所以``it is widely thought that low-frequency data ... is required to measure belief effects when using time-series variation''（第~8 页）；但观测频率越低，unit homogeneity 越难成立（相隔数世纪的单元不可比），``it comes at the cost of less credible identification, an issue highlighted by Hsiang \& Burke (2014) as the \emph{frequency-identification tradeoff}''（第~8--9 页）。缓解条件：若 belief effects 主要通过改变 direct effects 起作用，``total effects of climate still may be nearly identified with high-frequency time-series''（第~9 页）——adaptation 的产出是「改变同样天气下的产出」，高频系数未必漏掉它。
+
+\textbf{结果二：部分检验与 exact identification。}部分检验（\S 2.3）：若三种频率的估计相等，$\hat\beta_{CS}=\hat\beta_{LD}=\hat\beta_{TS}$，则``one plausible explanation is that the marginal treatment comparability assumption is valid and temporary changes in realizations of $\mathbf{c}$ have similar effects to analogous changes in $\mathbf{C}$''（第~9 页）。Exact identification（\S 2.4）是本综述最重的理论贡献：设结果是最大化问题的值函数 $Y(\mathbf{C}) = \max_{\mathbf{b}\in\mathbb{R}^N} z(\mathbf{b}, \mathbf{c}(\mathbf{C}))$（式 (14)，第~11 页）。Envelope 定理给出 $\partial z/\partial\mathbf{C}=\mathbf{0}$（式 (16)）与 $\partial z/\partial\mathbf{b}=\mathbf{0}$（式 (17)），于是
+\begin{equation*}
+\frac{\mathrm{d}Y(\mathbf{C}_1)}{\mathrm{d}\mathbf{C}_k} = \frac{\partial Y(\mathbf{C}_1)}{\partial c_k} ,
+\end{equation*}
+即``Locally, the marginal effect of climate on $Y$ is identical to the marginal effect of the weather. Eq.~20 implies that Eq.~9, the marginal treatment comparability assumption, holds''（式 (20) 及引文，第~13 页）。再用 Gradient 定理把边际效应沿气候路径积分，得非边际气候变化的效应
+\begin{equation}
+Y(\mathbf{C}_2) - Y(\mathbf{C}_1) = \int_{\mathbf{C}_1}^{\mathbf{C}_2} \hat\beta_{TS}\big|_{\mathbf{C}} \cdot \mathrm{d}\mathbf{C} ,
+\label{eq:hs-integral}
+\end{equation}
+``in the presence of adaptation adjustments in $\mathbf{b}$, using only time-series estimates''（式 (23) 及引文，第~14 页）。作者的总结：``If the outcome is a solution to a maximization problem (Eq.~14) for a function $z(.)$ that is continuous and differentiable in the space of all adaptive actions $\mathbf{b}$, then by the application of the Envelope Theorem (Eq.~18) we know that the marginal effect of the climate is exactly the same as the marginal effect of an equally structured change in the weather distribution (Eq.~20), if both are evaluated locally relative to an initial climate. By the Gradient Theorem we know that a sequence of marginal effects of the weather empirically estimated via time-series variation at sequential values of $\mathbf{C}$ can then be integrated to compute the effect of non-marginal climate changes''（第~14 页）。其几何直觉是论文自带的相邻两户例子：两户仅纬度略异、climate 略异，各自对自己的气候已优化；边际处适应的一阶成本为零，故南户经历北户天气的「天气效应」恰等于两户的「截面差异」（第~11 页）。\textbf{注意适用范围}：这一等价只在「结果已被优化」的边际处成立；截面路线要恢复 $Y(\mathbf{C})$ 还需积分常数相同（式 (24)，$\mathrm{d}\phi/\mathrm{d}t=0$），``which implies the strong form of the unit homogeneity assumption that units are comparable in levels conditional on the climate ... the set of assumptions necessary for valid cross-sectional identification in this setting is strictly larger than the set of assumptions required for time-series identification''（第~14 页）。
+
+\begin{intuition}[Envelope 论证与 M-G 切点的关系]
+Envelope 论证说的是：边际处天气效应等于气候效应。它并不说任何温度处的非线性面板系数等于 long-run response。\chref{ch:merel-gammans-2021} 的几何恰好补上这一点：他们的 climate penalty 模型里，各 location 的 short-run response 在自己的 $\mu_i$ 处与 long-run response 相切（该章图~\ref{fig:cca-lrsr}），切点正是 envelope 条件成立的地方；离开切点，naive 面板系数是加权平均而非 long-run response（M-G 第~1217 页自陈``our result is both different and more specific''）。两文合读，argument 的边界与例外都齐了。
+\end{intuition}
+
+\section{结果与解释：部分检验的实施（玉米单产）}
+
+综述的经验证据集中在 \S 2.3 的应用。数据：Schlenker 与 Roberts（2009）的县级玉米单产面板，更新至 2014 年，限于 100 度经线以东无缺失的 730 县（第~10 页）。做法：对温度、降水与单产三个序列施 Baxter--King 带通滤波，按 2--5、6--13、6--18、10--19、14--17、18--33 年等频段分别估计式 (10)，与原始年度估计（$\hat\beta_{TS}$，即 Schlenker--Roberts）、long differences（$\hat\beta_{LD}$，Burke \& Emerick）及横截面（$\hat\beta_{CS}$，Schlenker et al. 2006）并列（第~10 页；图 2E，第~9 页）。结果：``In all cases, except the cross-section, these estimated effects are near one another and not statistically different, suggesting that variations in temperature over time have similar effects on maize yields in this context, regardless of the time-scale of these variations''（第~10 页）。横截面例外的原因可辨：``the fact that $\hat\beta_{CS}$ changes substantially (to more closely resemble time-series estimates) when rainfall terms are \emph{omitted} highlights the vulnerability of the cross-sectional approach to misspecification''（第~10 页）。作者小结：``Nonetheless, these results overall appear consistent with an assumption of marginal treatment comparability in this context, at least for time scales shorter than 33 years''（第~10 页）。\textbf{读表须知}：检验的说服力直接受各设定 unit homogeneity 假设有效性的约束，``It is theoretically possible to obtain $\hat\beta_{CS}=\hat\beta_{LD}=\hat\beta_{TS}$ by chance even if all key assumptions are violated''（第~10 页）——等值不证真，只排除一部分反驳。
+
+\section{局限与批评}
+
+论文自己承认的：§2.4 的结论依赖``$Y$ is the solution to a [constrained] maximization, that adaptations in $\mathbf{b}$ take on continuous values, and that the maximand function $z(.)$ is differentiable in $\mathbf{b}$''，而``many prior studies do not properly compute climate effects via Eq.~23''（第~14 页，作者点名 Schlenker et al. 2013 与 Houser et al. 2015 为例外）；部分检验「等值可以是巧合」（第~10 页）。§6 登记的其余方法论挑战本讲义未读，待补写。后续文献：\chref{ch:merel-gammans-2021} 指出边际处等同只是特例——面板估计到的是 long-run 与 short-run 的加权平均，切点位置由变异结构决定（第~1215--1219、1217 页）。
+
+本讲义的评注：本综述与 \chref{ch:merel-gammans-2021} 是一组必须对着读的文献。Hsiang 回答「何时可以相信 weather 回归识别了 climate 效应」（边际处、被优化的结果），M-G 回答「不满足条件时偏离多远、偏向哪边」（偏度与变异构成决定）。前者的 Envelope 论证是后者的切点几何的解析版本；后者的偏差公式是前者未给出的量化。
+
+\section{在本领域脉络中的位置}
+
+本综述上承两站经验的分歧：\chref{ch:deschenes-greenstone-2007} 的组内识别被批评测不到 long-run adaptation，\chref{ch:burke-hsiang-miguel-2015} 的非线性面板被猜疑含有部分长期成分；它把两者放进同一框架，给出三种 designs 的假设清单与两个正式结果。它开的 新问题：frequency-identification tradeoff 之下，adaptation 的直接测度如何做（摘要承诺 §4 及以后的主题，待补读）；\chref{ch:merel-gammans-2021} 的偏差分解可视为对该问题的第一个闭式回答。指向 partinfo 用 \chref{ch:info-climate-change-adaptation}。
+
+% 章末参考文献（只列本章引用的条目），勿删
+\chapterrefs

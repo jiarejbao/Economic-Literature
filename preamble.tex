@@ -119,6 +119,13 @@
 % 跨章引用: \chref{ch:xxx} -> 「第1章」(无多余空格)
 \newcommand{\chref}[1]{第\ref{#1}章}
 
+% 章内建档/更新日期 (2026-10-22 加): 每章 \chapter 标题下方渲染一行小字。
+% 用法: \chdate{2026-10-18}{2026-10-21}  (Created-At, Updated-At)。
+% 注意: 不可用 \time{...} —— \time 是 TeX 只读寄存器(距午夜的分钟数), 不能带参数。
+\newcommand{\chdate}[2]{{%
+  \centering\noindent\footnotesize\color{black!55}
+  Created-At: #1,\quad Updated-At: #2\par}}
+
 % ------------------------- 实验室标识 -------------------------
 % Sagewood AI Lab 主标记: 一片叶, 叶脉画成神经网络。改动请与 brand/ 下的 SVG 保持同步。
 % 坐标沿用 SVG 的 64x64 画布(已翻转 y 轴), 自然尺寸约 22.5mm 高;

@@ -1,0 +1,101 @@
+% 精读章: Burke, Hsiang & Miguel, Global Non-Linear Effect of Temperature
+%         on Economic Production (Nature 2015)
+% 原文出处: doi:10.1038/nature15725（所据版本：期刊已刊版 Nature 527(7577): 235--239；
+%          本仓 papers/01_methods/2015-Nature-Burke-Hsiang-Miguel-*.pdf 为团队正典，
+%          本节页码引注均指该版；补充方法在 Supplementary Information，本仓无，
+%          相关内容注「见原文 SI」并标待补）
+% 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词，
+%          中文仅保留句法成分；定义处随文给中文对照并登记英文 \index。
+% 建档/更新日期由章首 \chdate 渲染（grep: chdate）
+% 主笔: 待认领；起草: Claude（2026-11-04，bjr 审订前稿）
+% partinfo 定位: nonlinear panel approach 的代表性应用——fixed effects 加二次
+%               温度项使横截面 weather 变异进入 identification，见
+%               \chref{ch:info-climate-change-adaptation} 的方法线与速查表。
+
+\chapter{Global Non-Linear Effect of Temperature on Economic Production（Burke, Hsiang \& Miguel，Nature 2015）}
+\label{ch:burke-hsiang-miguel-2015}
+% 章题过长，页眉用短题（preamble 的 \chaptermark 经 \markboth 排页眉）
+\chaptermark{Global Non-Linear Temperature Effects（Burke et al.，2015）}
+\chdate{2026-11-04}{2026-11-04}
+
+\section{这篇论文在说什么}
+
+一句话概括：论文用 166 国 1960--2010 的年度面板，以``comparing a country to itself in years when it is exposed to warmer- versus cooler-than-average temperatures''的组内识别配合二次温度项，发现``country-level economic production is smooth, non-linear, and concave in temperature (Fig.~2a), with a maximum at 13~$^\circ$C''（第~236 页），并报告历史变暖未改变这一响应——``subsistence-level observed warming over the period apparently did not induce notable adaptation''的判断由此进入领域（第~237 页措辞见下文结果节）。
+
+它在 partinfo 里的坐标：nonlinear panel approach 的代表应用站（\chref{ch:info-climate-change-adaptation} 方法线第三站）。它被 \citet{merel2021climate} 列入承认 nonlinear panel proposition 的研究名单（第~1208 页脚注~1），其面板数据也被 Mérel 与 Gammans 用作经验应用素材（第~1224 页），见 \chref{ch:merel-gammans-2021}。
+
+骨架表（Nature Letter 无编号小节；页码为期刊页码；补充方法在原文 SI）：
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}p{3.4cm}p{1.4cm}p{8.0cm}@{}}
+\toprule
+段落功能 & 页码 & 讲什么 \\
+\midrule
+摘要 & 235 & 非线性、13~$^\circ$C 最优、全球可用；projection：无减缓变暖使 2100 年全球平均收入降约 23\% \\
+引言与理论框架 & 235--236 & micro 高度非线性响应为何聚合成 macro 平滑凹响应；式 (1)；三条可检验预测 \\
+数据与识别 & 236 & 166 国 1960--2010；一国自身冷暖年对比；增长分解 (1)--(4) \\
+主要结果 & 236--237 & 13~$^\circ$C 响应、稳健性、rich/poor、农与非农 \\
+「无 adaptation」 & 237 & 1960--1989 对 1990--2010 子样本；观察期内未见 adaptation \\
+Projection & 237--239 & RCP8.5 与 SSP 情景、收入分布、与 IAM 损害函数对比 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{预备知识}
+
+读者需备两件。其一，增长率回归的用途：本文估计的是``how economic production changes relative to the previous year—that is, annual economic growth—to purge the data of secular factors in each economy that evolve gradually''（第~236 页），即用对上年作差分把缓慢演变的国别因素差分掉，再用固定效应与趋势项吸收其余。其二，聚合记号：$f_i(T)$ 是生产单元（如一个厂商）的瞬时生产率对温度的响应，$g_i(T-\bar{T}_i)$ 是该单元单元小时（unit-hours）在温度上的分布，$\bar T_i$ 是分布的中心。这两件都是论文自己的表述，见第~236 页。
+
+\section{数据与测度}
+
+产出数据覆盖 166 国、1960--2010（第~236 页），被解释变量取增长率；气候变量是年度平均温度与降水（第~236 页；具体数据源与构造见原文 Supplementary Information，本讲义未录，标待补）。识别所需的全部控制写在一组分解里：``We decompose economic growth to account for: (1) all constant differences between countries...; (2) all common contemporaneous shocks...; (3) country-specific quadratic trends in growth rates...; and (4) the possibly non-linear effects of annual average temperature and rainfall''（第~236 页）。作者的选型理由是：``This approach is more reliable than only adjusting for observed variables because it accounts for unobserved time-invariant and time-trending covariates''（第~236 页）。rich/poor 的划分用于分组响应（中位数以上为 rich，见 Figure 2b 注，第~236 页）。
+
+\section{模型设定与识别策略：micro 响应如何聚合出 macro 响应}
+
+本节是论文的理论贡献。micro 层面的证据早已表明：劳动供给、作物单产对温度``exhibit highly non-linear responses''，在 20--30\,$^\circ$C 之间存在突变阈值（第~235 页）。单个宏观国家的年度响应看起来却近似线性——这两组事实如何相容？论文的答案是聚合：把每国总产出写成对该国全部生产单元小时的积分
+\begin{equation}
+Y(\bar{T}) = \sum_i Y_i(\bar{T}) = \sum_i \int f_i(T)\, g_i(T-\bar{T}_i)\,\mathrm{d}T ,
+\label{eq:bhm-agg}
+\end{equation}
+其中 $g_i(T-\bar{T}_i)$ 是该国单元小时的温度分布（第~236 页）。式~\ref{eq:bhm-agg} 给出三条可检验预测（第~236 页）：其一，$Y(\bar T)$ 是温度的光滑凹函数——micro 响应的不连续阈值经分布 $g_i$ 加权求和后被抹平；其二，聚合响应的最优温度低于 micro 响应的最优温度——$(\mathrm{d}Y/\mathrm{d}\bar T)\propto$ 各温度处 micro 斜率按暴露量加权，分布右移后权重压在已过阈值的高温段，``the slope above the threshold is steeper than minus the slope below the threshold''（第~236 页）；其三，响应形状不随经济发展剧烈改变（``declines at the micro level are reflected in coarser macro-level data''的对偶推论，第~236 页）。Figure 1（第~235 页）逐步画了这一映射：micro 阶梯响应 $\times$ 温度分布 $\to$ 平滑凹的年度响应。
+
+identification 与 \chref{ch:deschenes-greenstone-2007} 同族但换了尺度和函数形式：``In practice, we approximate this experiment by comparing a country to itself in years when it is exposed to warmer- versus cooler-than-average temperatures due to naturally occurring stochastic atmospheric changes''（第~236 页）。作者明确拒绝截面比较：``We do not compare output across different countries because such comparisons are probably confounded, distinguishing our approach from cross-sectional studies that attribute differences across countries to their temperatures''（第~236 页）。响应函数取二次（第~235 页 Figure 1e--f 的记号，slope $= m\beta_1 + \bar T m\beta_2$；正文设定见 SI）。
+
+\begin{ident}[BHM 增长率回归的可搬用设定]
+被解释变量：人均 GDP 增长率；回归元：年度平均温度及其平方（降水同理）；固定效应：国家、年份，另加国家二次增长趋势；识别假设：给定上述控制，一国年度温度偏离与增长率中的其他冲击正交（作者以第~236 页的分解 (1)--(4) 陈述）。口径要求：温度为年度平均温度（非生长季），产出为增长流量而非水平值。
+\end{ident}
+
+\begin{intuition}[为什么聚合会压低最优温度]
+微厂商的响应在阈值处由平转陡；一个国家的单元小时沿温度分布摊开，温度每升一度，新增暴露落在分布右端——那里早已过阈值、损失斜率更陡。所以国家的最优温度不落在「典型单元」的阈值上，而落在分布加权的斜率平衡点，比 micro 阈值更冷。这条直觉直接解释了 13~$^\circ$C（第~235--236 页）。
+\end{intuition}
+
+\section{结果与解释}
+
+\textbf{主结果。}``We find country-level economic production is smooth, non-linear, and concave in temperature (Fig.~2a), with a maximum at 13~$^\circ$C, well below the threshold values recovered from micro-level analyses and consistent with predictions from equation (1)''（第~236 页）。响应的形态：``Cold-country productivity increases with annual temperature increases, until the optimum. Productivity declines gradually with further warming, and this decline accelerates at higher temperatures''（第~236 页）。
+
+\textbf{稳健性。}允许响应随国家变富而变（响应函数 country-specific）、高阶多项式与样条、剔除少观测国与主要生产国、剔除中美两国、加洲际固定效应、弱趋势假设、多套替代数据，结果均在（第~237 页；具体图形见 Extended Data，本讲义未录）。温度冲击的滞后效应也考察过：``Extended Data Fig.~2c) This `no catch up' behaviour is consistent with the observed response to other temperature disturbances, such as tropical cyclones''（第~237 页）。
+
+\textbf{rich/poor 与部门分解。}穷国响应更陡——``Poor tropical countries exhibit larger responses mainly because they are hotter on average, not because they are poorer''（第~237 页）；rich 与 poor 的响应形态``are statistically indistinguishable''（第~237 页），但高温处 rich 国负效应的边际效应``an 80\% likelihood that the marginal effect of warming is negative at high temperatures in these countries''（第~237 页）。农业与非农业 GDP 的响应都呈凹形（Figure 2d--e，第~236 页）。
+
+\textbf{「无 adaptation」的经验判断。}这是本文进入方法线争论的关键证据：把样本切成 1960--1989 与 1990--2010 两段，``Results using data from 1960–1989 and 1990–2010 are nearly identical (Fig.~2c)''；作者的表述是``We do not find that technological advances or the accumulation of wealth and experience since 1960 has fundamentally altered the relationship between productivity and temperature''（第~237 页），并进一步说``We find only weak suggestive evidence that richer populations are less vulnerable to warming, and no evidence that experience with high temperatures, and technological advances since 1960 have altered the global response to temperature. This suggests that adaptation to climate change may be more difficult than previously believed''（第~237 页）。\textbf{注意这条证据的口径}：它是子样本系数对比，不是 adaptation 的直接测度；它测的是「30 年间全球响应函数是否移动」，而年际波动识别的响应本身只含 \chref{ch:merel-gammans-2021} 所说的部分长期成分——两层局限在读结论时要叠加考虑。
+
+\textbf{Projection。}把估计的非线性响应外推到 RCP8.5 与 SSP 情景：基准模型（SSP5）``climate change reduces projected global output by 23\% in 2100... relative to a world without climate change, although statistical uncertainty allows for positive impacts with probability 0.28''（第~238 页）；收入分布后果更重，SSP3 下``the poorest 40\% of countries declines 75\% by 2100 relative to a world without climate change, while the richest 20\% experience slight gains''（第~238 页）。外推的假设由作者自己交代：``This approach assumes future economies respond to temperature changes similarly to today's economies—perhaps a reasonable assumption given the observed lack of adaptation during our 50-year sample''（第~237 页）。与 IAM 损害函数对比：``expected global losses are approximately linear in global mean temperature, with median losses many times larger than leading models indicate''（摘要，第~235 页）。
+
+\section{机制与讨论}
+
+聚合机制（式~\ref{eq:bhm-agg}）在结果端有直接对应：micro 阈值 20--30\,$^\circ$C 与 macro 最优 13~$^\circ$C 的落差正是暴露分布加权的产物（第~235--236 页）。不平等机制的表述：``Strong negative correlation between baseline income and baseline temperature indicates that warming may amplify global inequality, because hot, poor countries will probably suffer the largest reduction in growth''（第~238 页）。对 IAM 的含义：用本文损害函数回填，``Commonly used functions are within our estimated uncertainty, but differ in two important respects''——低温端损害更大、损失对全球均温近似线性（第~238 页）。
+
+\section{局限与批评}
+
+论文自己承认的：其一，projection 假设未来经济体与今日响应相同，其辩护是样本期内未见 adaptation（第~237 页）——这同时意味着若 adaptation 出现，projection 偏悲观；其二，响应不随收入分组的统计不可分本身也说明数据对 rich/poor 差异约束有限（``However, if the non-linearity in the rich-country response alone is statistically significant... we estimate an 80\% likelihood...''，第~237 页，rich 国子样本本身高温观测少）；其三，精度的来源是国别年观测数，作者在多处给出统计不确定性的显式区间（如 23\% 的 0.28 正效应概率，第~238 页）。
+
+后续文献指出的：\citet{merel2021climate} 的偏差分解为解读本文系数提供了 missing 的一环——本文的温度系数是 long-run 与 short-run response 的加权平均（无偏度时为 convex combination），长期权重取决于总体 weather 变异中来自横截面 climatic differences 的份额（第~1209 页），本文面板横截面大（166 国）、长期成分占比应高，但精确份额须按 \chref{ch:merel-gammans-2021} 的式 (12) 计算后才可断言（本讲义的引申）。对本文 projection 的外部批评（收入弹性、加总口径等）在后续文献中存在，待精读后补（本节待写）。
+
+本讲义的评注：本文与 \chref{ch:deschenes-greenstone-2007} 的对照是方法线最好的一组教材——同一族组内识别，D-G 用线性设定于县级利润，BHM 用二次设定于国家增长；BHM 自己说``Our finding that rich countries respond non-linearly to temperature is consistent with recent country-level results in the United States''（第~237 页），可见作者清楚两条线的亲缘。
+
+\section{在本领域脉络中的位置}
+
+本文回答的旧问题：温度—产出的 macro 关系是否非线性、全球是否共用一条响应（答案：是，13~$^\circ$C 最优）。它开的 新问题：这条响应里有多少 long-run adaptation 成分——由 \chref{ch:merel-gammans-2021} 形式化为可计算量；「50 年未见 adaptation」的判断也把 adaptation 检验推到台前（\chref{ch:deschenes-greenstone-2007} 的自认局限、\chref{ch:hsiang-2016} 的三频率检验是同一争论的两面）。指向 partinfo 用 \chref{ch:info-climate-change-adaptation}。
+
+% 章末参考文献（只列本章引用的条目），勿删
+\chapterrefs

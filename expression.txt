@@ -12,3 +12,4 @@ reduced form	简化式	不显式建模决策过程的回归设定 ?
 convex combination	凸组合	权重非负且和为一的加权平均，用于陈述估计量的构成 ?
 data-generating process	数据生成过程	陈述 DGP 假设时用，缩写 DGP
 
+proposition	命题	被多项研究谨慎承认（cautiously acknowledged）、尚待形式化的领域论断（随 Mérel & Gammans 2021 用法）?

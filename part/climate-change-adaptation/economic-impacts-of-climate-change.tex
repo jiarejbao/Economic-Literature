@@ -1,0 +1,158 @@
+% 精读章: Deschênes & Greenstone, The Economic Impacts of Climate Change:
+%         Evidence from Agricultural Output and Random Fluctuations in Weather
+%         (AER 2007, P&P)
+% 原文出处: doi:10.1257/aer.97.1.354（所据版本：期刊已刊版 AER 97(1): 354--385；
+%          本仓 papers/01_methods/2007-AER-Deschenes-Greenstone-*.pdf 为团队正典，
+%          本节页码引注均指该版）
+% 体例注记: 2026-10-21 起，正文中的 terms/expressions 一律用英文原词，
+%          中文仅保留句法成分；定义处随文给中文对照并登记英文 \index。
+% 建档/更新日期由章首 \chdate 渲染（grep: chdate）
+% 主笔: bjr；初稿: 2026-11-04（Claude 协助起草，bjr 审订）
+% partinfo 定位: 把 weather 波动面板（panel approach）引入农业影响评估，
+%               并自认面板估计不含全部 substitution、相对 long-run effect
+%               向下偏（adaptation 批评的源头），见
+%               \chref{ch:info-climate-change-adaptation} 的方法线与速查表。
+
+\chapter{The Economic Impacts of Climate Change（Deschênes \& Greenstone，AER 2007）}
+\label{ch:deschenes-greenstone-2007}
+% 章题过长，页眉用短题（preamble 的 \chaptermark 经 \markboth 排页眉）
+\chaptermark{Economic Impacts of Climate Change（Deschênes \& Greenstone，2007）}
+\chdate{2026-11-04}{2026-11-04}
+
+\section{这篇论文在说什么}
+
+一句话概括：论文用 counties 内部逐年 \index{weather}weather 波动（conditional on county 与 state$\times$year fixed effects）估计 climate change 对美国农业部门利润的影响，以此回应截面 hedonic（即 \index{Ricardian}Ricardian）路线的 omitted variables 批评；其经验结论是影响小且不显著——``The preferred estimates indicate that climate change will increase annual profits by \$1.3 billion in 2002 dollars (2002\$) or 4 percent''（第~354 页），并判定截面路线``extremely sensitive to seemingly minor choices about control variables, sample, and weighting''，故不可靠（第~354 页）。
+
+它在 partinfo 里的坐标：panel approach 的引入站（\chref{ch:info-climate-change-adaptation} 方法线第二站）。论文自己写明的局限——面板估计不含跨年 adaptation、相对 long-run effect 向下偏（第~359 页）——就是后来 adaptation 检验路线的起点，由 \chref{ch:burke-hsiang-miguel-2015} 与 \chref{ch:merel-gammans-2021} 接手。
+
+骨架表（所据版本：AER 97(1) 已刊版；页码为期刊页码）：
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}p{2.6cm}p{1.6cm}p{8.6cm}@{}}
+\toprule
+原文章节 & 页码 & 讲什么 \\
+\midrule
+Abstract & 354 & +\$1.3 billion（4\%）的基准结论；hedonic 不可靠 \\
+\S I Conceptual Framework & 357--359 & I.A 面板新策略对 hedonic 的三处替代；I.B 用年际波动推断气候效应的经济学（式 (1)(2)），自认 downward bias \\
+\S II Data & 359--364 & Census of Agriculture 县级面板；PRISM 气候数据与 growing-season degree-days 构造；气候预测情景 \\
+\S III Econometric Strategy & 365--367 & III.A hedonic 设定（式 (3)）；III.B 面板设定（式 (4)）与 identification assumption \\
+\S IV Results & 367--380 & IV.A hedonic 重估（Table 3--4）；IV.B 利润面板（Table 5--7）；IV.C 单产（Table 8） \\
+\S V Interpretation & 380--381 & 福利换算（现值 \$26 billion）；五条 caveats \\
+\S VI Conclusions & 381 & 结论与后续研究方向 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{预备知识}
+
+读者需备两件旧工具。其一，本文之前的两条路线各有一难：production function approach 用天气对具体作物单产的影响，剔除了土壤等农户控制不了的因素，但``farmer adaptations are completely constrained in the production function approach''，估计向下偏（第~355 页）；hedonic approach 用农地价值对 climate 变量回归，理论上地价``reflect the present discounted value of land rents into the infinite future''，``In principle, this approach accounts for the full range of farmer adaptations''，但 unmeasured characteristics（土壤质量、转用期权价值等，作者引 Hoch 1958、1962 与 Mundlak 1961）与 climate 相关，``the sign and magnitude of the resulting omitted variables bias is unknown''（第~355 页）。其二，\index{degree-days}degree-days（生长度日，术语来自农学与气象学，见 \chref{ch:info-climate-change-adaptation} 的 terms 登记）：作物累积热量暴露的度量，日平均温度在基点与顶点之间时按超出基点的度数累积（构造口径见下文数据节）。
+
+\section{数据与测度}
+
+\textbf{产出与利润。}农业数据来自 Census of Agriculture（1978、1982、1987、1992、1997、2002 六次普查），观测单位是县，样本限于年产农产品价值不低于 \$1{,}000 的农场所在的县；主分析用数据完整的 1987--2002 四次普查，得 2{,}268 县平衡面板（第~360、362 页；阿拉斯加与夏威夷剔除，缺任一年份任一变量的县剔除，第~362 页脚注 11）。被解释变量是县均农地利润（per acre）：农畜产品市场价值减去生产支出，\textbf{不含联邦农业项目支付}（第~360 页）。作者明言这是不理想的口径：普查的支出项不含未抵押自有资本的利息，故利润是资本成本的偏大度量（第~360 页）；而全县平均地租约 \$35（2002\$），利润约 \$42（2002\$），因此把利润口径的影响估计乘以二者之比 0.83 才换算成租金口径的福利度量（第~360 页）。
+
+\textbf{气候与 weather。}气候数据用 PRISM 模型（4$\times$4 公里格点的降水与温度插值，作者称其为``almost all professional weather services... regarded as one of the most reliable interpolation procedures''，第~361 页）。growing season 取 4 月 1 日至 9 月 30 日（冬小麦除外，第~361 页）。\index{degree-days}degree-days 的构造遵循农学传统（Ritchie 与 NeSmith 1991；SHF 沿用）：基点 46.4\,F（8\,$^\circ$C）、顶点 89.6\,F（32\,$^\circ$C），日平均温度在区间内贡献（均温$-$基点）个 degree-days，超过顶点的日子贡献 43.2 个 degree-days（第~361--362 页）；作者注明 Schlenker 等主张 93.2\,F（34\,$^\circ$C）顶点，并做了讨论（第~361 页）。月度 PRISM 数据算不出逐日 degree-days，作者改用约 8{,}000 个地面气象站的逐日数据（NCDC Cooperative Summary of the Day）——这是对既有文献（用月度数据加分布假设，如 Thom 1966 与 SHF 2006）的测度改进（第~362 页）。
+
+\textbf{气候情景。}两组预测：IPCC 基准情景（全季全区均匀 +5\,F、降水 +8\%）；Hadley 2 模型的逐日州级预测（2020--2049 与 2070--2099 两窗口，第~362 页）。
+
+\textbf{weather 波动与气候变化的量级对比。}这是本文测度一节最该记住的表：Table 2C（第~364 页）报告去年份固定效应、去 state$\times$year 固定效应后，degree-days 偏离超过 $\pm400$、$\pm800$、$\pm1200$ 的县年占比（如去 state$\times$year 后 62.3\% 的县年偏离超过 400 度日、35.3\% 超过 800、18.1\% 超过 1200，第~365 页）。基准气候情景的 degree-days 变化约 +1200 度日（表 2A），这一幅度在历史 weather 波动里并不罕见（约 2.2\% 的县年观测有更大的偏离，第~365 页）——识别用的变异与要外推的变异在量级上重叠，是 panel approach 可信的前提。
+
+\section{模型设定与识别策略}
+
+本节是论文的理论贡献：先把截面 hedonic 写出来（式 (3)），再给出面板替代（式 (4)），由识别反推假设，最后用 \S I.B 的两期经济学说明这套估计量测到的是什么、偏向哪边。
+
+\subsection{截面 hedonic 及其问题}
+
+hedonic 设定为
+\begin{equation}
+y_{ct} = \mathbf{X}_{ct}\boldsymbol{\beta} + \sum_l \boldsymbol{\theta}_l f_l(\widetilde{\mathbf{W}}_{tc}) + \epsilon_{ct},
+\qquad \epsilon_{ct} = \alpha_c + u_{ct},
+\label{eq:dg-hedonic}
+\end{equation}
+其中 $y_{ct}$ 是县 $c$ 在年 $t$ 的农地价值（per acre），$\widetilde{\mathbf{W}}_{tc}$ 是气候 normals（1 月、4 月、7 月、10 月的温度与降水共八个变量），$f_l$ 取线性加二次项，并允许灌溉县与非灌溉县参数不同（第~365--366 页，沿 Mendelsohn、Nordhaus 与 Shaw 1994 的设定）。$y_{ct}$ 可在任一普查年估计，故 $\alpha_c$ 吸收的是县级不随时间变化的因素。问题在于：$\E[u_{ct} \mid f_l(\widetilde{\mathbf{W}}_{tc}), \mathbf{X}_{ct}] = 0$ 没有理由成立——土壤质量、灌溉可得性、城市化压力都与气候相关（Table 3 的平衡性检验直接拒绝了各四分位组均值相等的假设，见结果节），且式~\ref{eq:dg-hedonic} 的函数形式本身无从检验（第~365--366、368 页）。
+
+\subsection{面板替代与 identification}
+
+新设定把气候 normals 换成逐年 weather：
+\begin{equation}
+y_{ct} = \alpha_c + \gamma_t + \mathbf{X}_t\boldsymbol{\beta} + \sum_l \boldsymbol{\theta}_l f_l(\mathbf{W}_{ct}) + u_{ct},
+\label{eq:dg-panel}
+\end{equation}
+被解释变量改为县级农业利润，$\alpha_c$ 为完整 county fixed effects，基准设定把 $\gamma_t$ 换成 state$\times$year fixed effects $\gamma_{ct}$（第~367 页）。被解释变量为何从地价换成利润：``land values capitalize long-run characteristics of sites and, conditional on county fixed effects, annual realizations of weather should not affect land values. Weather does, however, affect farm revenues and expenditures, and their difference is equal to profits''（第~367 页）。为何气候变量必须退场：``Second, it is impossible to estimate the effect of the long-run climate averages in a model with county fixed effects, because there is no temporal variation in $\widetilde{W}_{tc}$. Consequently, we replace the climate variables with annual realizations of weather, $W_{ct}$''（第~367 页；$\widetilde{W}_{tc}$ 即气候 normals）。
+
+identification 依赖
+\begin{equation*}
+\E\bigl[u_{ct} \mid f_l(\mathbf{W}_{ct}), \mathbf{X}_{ct}, \alpha_c\bigr] = 0 ,
+\end{equation*}
+即 weather 参数由 county-specific deviations in weather about the county averages（再调整掉州内共同冲击）识别；作者称这一变异``is presumed to be orthogonal to unobserved determinants of agricultural profits''（第~357、367 页）。推断上用 Conley 空间相关标准误（纬度 7 度、约 500 英里截断）与 Eker--White 异方差稳健标准误，并以农地面积平方根加权（第~366 页）。
+
+\begin{pitfall}[fixed effects 放大测量误差]
+\label{pit:dg-attenuation}
+作者自己提醒：``A shortcoming of this approach is that all the fixed effects are likely to magnify the importance of misspecification due to measurement error, which generally attenuates the estimated weather parameters''（第~367 页）。组内变异被固定效应削去大半后，weather 测度误差在信号中的占比上升，衰减偏误（attenuation bias）随之加重。读 Table 5--6 的系数时必须带着这一条：面板系数偏小，未必是``影响确实小''。
+\end{pitfall}
+
+\subsection{理论贡献：这套估计量测到的是什么（式 (1)(2)）}
+
+\S I.B 把``用年际波动推断气候效应''的经济学摊开。代表性农户生产给定作物、不能随天气换作物，利润为
+\begin{equation}
+\pi = p(q(w))\,q(w) - c(q(w)),
+\label{eq:dg-profit}
+\end{equation}
+其中 $q$ 是产出，$w$ 是 weather；价格与总成本是产量的函数，产量是 weather 的函数。对 $w$ 求导：
+\begin{equation}
+\frac{\partial \pi}{\partial w} =
+\underbrace{\frac{\partial p}{\partial q}\frac{\partial q}{\partial w}\,q}_{\text{价格效应}}
++ \underbrace{\Bigl(p - \frac{\partial c}{\partial q}\Bigr)\frac{\partial q}{\partial w}}_{\text{数量效应}} .
+\label{eq:dg-decomp}
+\end{equation}
+第一项是 weather 冲击经由价格变化带来的利润变化（乘以冲击前的初始产量 $q$），它只在短期内存在——当年减产推高价格，全行业都受益于价格上升；第二项是本文想隔离的长期效应（holding constant crop choice，第~358 页）。关键在弹性对比：长期里其他农户可以扩产或新农户可以进入，``it is sensible to assume that $(\partial p/\partial q)_{\text{Long-Run}} > (\partial p/\partial q)_{\text{Short-Run}}$, and perhaps even equal to zero''（注意 $\partial p/\partial q<0$，``$>$''指其绝对值更小，第~358 页），故第一项短期可为正、长期趋零——年际波动给出的价格效应是短期价格反应的产物，不含长期市场调整。
+
+于是得到本文最要紧的一段自我定位：``This paper's empirical strategy relies on year-to-year variation in weather, and thus it is unlikely that farmers are able to switch crops upon a year's weather realization. The import for the subsequent analysis is that our estimates of the impact of climate change may be downward biased, relative to the preferred long-run effect that allows for all economic substitutions. If the degree of climate change is `small', however, our estimates are equal to the preferred long-run effect''（第~359 页）。Figure 2 的几何版本：作物 1 的利润函数在 $T_1$ 到 $T_2$ 间最优、作物 2 在 $T_2$ 到 $T_3$ 间最优，hedonic 均衡是两段的上包络；气候从 $T_1$ 升到 $T_3$，能换作物的长期利润读在 $C$ 点，被锁定在作物 1 的短期利润读在 $C'$ 点，$C'-A$ 是 $C-A$ 的向下偏估计（第~359 页）。\textbf{这就是 panel approach 与 long-run effect 之间那道缝的首次定量陈述}，也是 \chref{ch:merel-gammans-2021} 全部问题的起点。
+
+\begin{intuition}[一年的干旱与干旱的 climate]
+D-G 的版本：一年的干旱不值得为此换作物或卖地，但若干旱成为本地 climate，换作物、卖地、改灌溉都会发生。年际 weather 波动识别的正是前者——它不含跨年才能完成的调整。后文 \chref{ch:merel-gammans-2021} 用灌渠与风扇举的同一组例子，源头在此（第~359 页；对照 \chref{ch:burke-hsiang-miguel-2015} 的 50 年样本检验）。
+\end{intuition}
+
+\section{结果与解释}
+
+按论文自己的顺序：先检验 hedonic 的前提，再重估 hedonic，最后上本文自己的面板估计。
+
+\subsection{平衡性检验：weather normals 与可观测变量不独立}
+
+Table 3（第~368 页）把县按 7 月温度 normals 与降水 normals 各分四分位组：农地价值（\$/acre）从最冷组的 1{,}118 升到次热组的 1{,}689，人口密度、城市化的组间差异同样显著（$F$ 统计量 19.7 与 14.1，均可拒绝均值相等）。作者引两点理由说明这威胁 hedonic 的识别：``First, consistent inference will not depend on functional form assumptions on the relation between the observable confounders and farm values. Second, the unobservables may be more likely to be balanced''（第~368 页）。扩展检验中，112 个解释变量均值相等的原假设有 111 个在 1\% 水平被拒（第~369 页）。
+
+\subsection{hedonic 重估：不稳健}
+
+复刻 SHF（2005）的 1982 年设定，5\,F 加 8\% 情景对农地价值的总影响为 $-\$343.7$ billion（改用 cropland 权重则 $-\$69.1$ billion，第~369 页）。两组稳健性：丢掉气候变量换 state fixed effects，估计变为 $-\$98.5$ 与 $-\$437.6$ billion；只控制气候变量加 state fixed effects，得到 $-\$747.8$ 与 $\$1{,}034$ billion——后一个数字``seems implausible, since it is nearly as large as the entire value of agricultural land and buildings in the United States, which was \$1,115 billion in 2002''（第~369 页）。重构 SHF 数据与改权重后，估计在 $\$225.1$、$-\$315.4$、$-\$0.6$ billion 之间跳动（第~369 页）。作者结论：``It seems reasonable to conclude that the application of the hedonic approach to the SHF data fails to produce robust estimates of the impact of climate change, even with a single year of data''（第~369 页）。
+
+D-G 自己的更完整 hedonic（Table 4，第~370--371 页）把同样的不稳定摆得更齐：42 个估计中，分年度设定的点估计从 $-\$202$ 到 $\$321$ billion；六种合并设定与权重组合下从 $-\$75.1$ 到 $\$110.8$ billion；且 D-G 偏好的 C 设定给出显著为正的 $\$95.2$ 与 $\$110.8$ billion（第~371 页）。作者的评价是：``There are no ex ante reasons to believe that the estimates from a particular year are more reliable than those from other years. These results are troubling''（第~371 页）。\textbf{注意读法}：D-G 并不是说 hedonic 估出的影响是正的或负的，而是说同一数据稍换口径结果就翻转——不可靠本身是主要发现（摘要：``to be unreliable because it produces estimates that are extremely sensitive to seemingly minor choices about control variables, sample, and weighting''，第~354 页）。
+
+\subsection{本文的 panel approach：利润的影响小且不显著}
+
+Table 5（第~375 页）报告 Hadley 2 长期情景（2070--2099）下利润的变化。偏好设定（第 4 列：土壤控制变量加 state$\times$year fixed effects）给出``climate change will lead to an increase in agricultural sector profits of roughly \$1.3 billion. This estimate is statistically indistinguishable from zero with either (Eicker--White... or Conley...) standard errors''；95\% 置信区间 $[-\$50.5, \$53.1]$ billion，对 1987--2002 年均利润 \$32.3 billion 而言即 $-1.5\%$ 到 $+1.5\%$（第~374 页）。分解上，影响集中在非灌溉县（degree-days 效应 0.88 对灌溉县 0.19，第~375 页）。Table 6（第~376 页）的稳健性覆盖线性、三次式、500 度日分箱指标、有害度日、剔除强影响点、灌溉县定义 50\%/75\% 分界、生长季定义与不加权等十二种变体，估计全部落在 $-\$0.98$ 到 $\$3.59$ billion 之间——``a zero effect cannot be rejected in any of these cases''（第~376 页）。分州看（Table 7，第~377--378 页），最大的输家是加州（$-\$750$ million，约其农业利润的 15\%），最大的赢家是南达科他（$+\$720$ million）与佐治亚（$+\$540$ million）；八个州在 5\% 水平都无法拒绝零影响（第~377 页）。单产端（Table 8，第~379 页），玉米与大豆的长期影响都统计不异于零（州$\times$年固定效应设定下分别为 $+0.01$ 与 $+0.02$ bushels/acre），作者据此排除了``利润影响小只是价格效应''的解释（第~380 页）。
+
+贯穿全章的具体例子按承诺收尾：degree-days 偏离的量级对比（数据节 Table 2C：情景 +1200 度日在历史波动里只算 2.2\% 分位以上的偏离，第~365 页）与响应面的平坦（引言对 Figure 1 的概括：``The striking finding is that all of the response surfaces are flat over the ranges of the predicted changes in degree-days and inches. If anything, climate change appears to be slightly beneficial for profits and yields''，第~355 页）合起来就是基准结论的直观版本。
+
+\begin{pitfall}[从「影响不显著」读出「没有影响」]
+D-G 的结论是``economically and statistically small changes in profits''加一个宽置信区间（$-\$0.5$ 到 $\$3.1$ billion，第~377 页），不是影响为零的点断言。同样不可忘的是易错点~\ref{pit:dg-attenuation}：固定效应放大测量误差，估计天然偏衰减。后续文献对本文的批评（见下节）恰恰不是``你们估出了零''，而是``这套变异只测到 short-run response''——两件事不要混。
+\end{pitfall}
+
+\section{机制与讨论}
+
+福利换算：把 +\$1.3 billion 的年度利润增量按 5\% 折现率永续处理，``This implies that climate change increases the present value of the stream of land rents by about \$26 billion. The 95-percent confidence interval is $-\$10$ billion to \$62 billion''（第~380 页）。作者强调这个区间``is much tighter than the range of point estimates from the hedonic approach''（第~380 页）——面板路线的收获是置信区间的可信性，不只是点估计。注意换算的两个前提（利润增量对所有未来年份成立、5\% 折现率），它们是本讲义复算时的依据，不是原文的表内数字。
+
+\section{局限与批评}
+
+论文自己承认的（\S V，第~380--381 页）：其一，极端事件（干旱、洪水）不在 growing-season 度日与降水的均值刻画里，本分析对这类事件``uninformative''；其二，climate change 全球性的供给侧调整不在年际波动里，价格的一般均衡效应可能未被吸收（作者同时指出 hedonic 同样处理不了）；其三，政府补贴项目影响利润与地价（引 Kirwan 2005）；其四，利润口径低估资本成本（未计自有资本的利息）且未扣家庭劳动工资；其五，作者明说有两处会\textbf{高估}损害：年度波动容不下全部 adaptation（``farmers will undertake these adaptations only if the benefits exceed the costs''，偏误方向有符号，第~381 页），以及 CO$_2$ 增产的施肥效应未入模型（第~381 页）。
+
+后续文献指出的：\citet{merel2021climate} 在第~1207 页把这条批评线整理为 panel approach ``reliance on weather fluctuations rather than climatic differences''，无法反映 long-run adaptation；本文 \S I.B 的自认（第~359 页）正是其源头。\citet{hsiang2016climate} 进一步把这套设计的前提形式化为 marginal treatment comparability 假设（第~6 页，见 \chref{ch:hsiang-2016}）；\chref{ch:merel-gammans-2021} 证明线性面板系数对 long-run response 的偏离可以有多大，并给出同时估计 short-run 与 long-run response 的增广设定。
+
+本讲义的评注：D-G 的地位不在它的点估计（+\$1.3 billion 后来少被引用），而在三件事——把 identification 从截面挪到组内、把利润口径的测度缺陷交代到底、以及把``面板测不到 long-run''写成了论文自己的结论。读这篇论文要同时拿到这三件，漏掉第三件就会把方法线的下一步（\chref{ch:burke-hsiang-miguel-2015}、\chref{ch:merel-gammans-2021}）读成无源之水。
+
+\section{在本领域脉络中的位置}
+
+本文回答的旧问题：截面 Ricardian 的 omitted variables bias 有多大（答案：hedonic 估计对口径选择极敏感，不可靠）。它开的 新问题：panel approach 识别的 short-run response 与 long-run effect 差多少——这个差后来有了三个名字：Burke 与 Emerick（2016）的 \index{long differences}long differences 差分（时间线 2016）、Hsiang（2016）的 marginal treatment comparability 检验（\chref{ch:hsiang-2016}）、Mérel 与 Gammans（2021）的 climate penalty 增广回归（\chref{ch:merel-gammans-2021}）。本讲义的归纳：方法线上它是第二站，其自认局限（第~359 页）是第三站及以后一切工作的出发点。
+
+% 章末参考文献（只列本章引用的条目），勿删
+\chapterrefs
