@@ -57,8 +57,15 @@ Conclusion & 1235--1236 & 结论与政策含义 \\
 \label{sec:cca-model}
 % 整section逻辑都需要修改，我接下来写每个subsection的提纲，借助KIMI ai补全完整内容。
 
-% 本节基于论文第二节+  McIntosh and Schlenker (2006)，讲解 climate penalty augmented panel model 的identification逻辑。
+% 本节基于论文第二节+  McIntosh and Schlenker (2006)，讲解 climate penalty  panel model 的identification逻辑。
 
+% subsection 1{Identification Model} 
+% 1.数据规模 i locations \times t periods, explanary variables, weather fluctuation variables. 
+% 2. identification model, namely current equation 5.1。
+% 3.Assumptions: ①stationary locational climates, 论文表述是 equation 5.4，我对该假设的理解是：given location，climate不会变化，adaptation指的是agents in given location对于（weather - climate）的适应行为；我的initial opinion是given location, climate change, agents behave to adapt to changed climate，initial opinion更偏向 long-run adaptation, currunt opionion更偏向short-run adaptation。On the other hand, cross-locations' climate symbolize climate difference, long-run adaptation只存在于climate difference即cross-locations。
+% Assumption1's note: ①climate penalty  model中long-run adaptation是在locational fixed effects中包含了吗？②stationary locational climates assumption中的observation period是否使用assumpized period，设置一个climate-no-change 年限更合理？③只保留 Assumption 1，其余均撤销。Optimizing agents使用一个小卡片补充即可。④DGP是什么意思？数据生成过程？这里的数据指的是 short-run response数据？总不会指的是 penal data?
+% 4.Interpretion, ①该识别基于short-run panel data, equation 5.1 拟合的是short-run response; 根据Assumption推理得long-run response couterfactual  model 如current equation 5.5；equation 5.5无法观测，只能通过equation 5.1 identify。②因此adaptation可由\beta_3表示，具体解释为：XXX。
+% 5、几何图理解：long-run是一条包络线，short-run是无数条climate-\mu 对应的curves
 本节基于论文第二节，讲清这篇文章的核心贡献——nonlinear climate penalty model——的 identification：先说清要识别什么、分几步识别，再由每一步 identification 反推出它依赖的 assumption，最后据这些 assumption 分析该 model 的适用条件与局限。论文自述这是一个 reduced-form 的 long-run adaptation 模型：行为含义通过 penalty term 进入设定，但行动选择本身不被显式建模。
 
 \subsection{Identification 1：climate penalty 的系数}
@@ -217,6 +224,9 @@ long-run response 观测不到，识别它只能经由 short-run：
 \section{渐近偏差分解：naive 面板系数的构成}
 \label{sec:cca-bias}
 
+% section的导读没有问题
+
+% subsection的内容也没问题，但是要修改推到逻辑，按照 ommited variable bias 的推导过程，计算 equation 5.7 equation5.9。正文写清楚推导逻辑，用卡片写具体的计算过程（不用补充统计学基础知识，写清楚计算化简过程即可。）
 本节完成「A Simple Model of Long-Run Climatic Adaptation」一节留下的任务：在式~\ref{eq:cca-dgp} 之下，计算漏掉 penalty term 的 naive 二次面板的估计量收敛到什么。先看论文自己的一句话总结：``Said differently, panel estimates from the quadratic weather-outcome relationship can be thought of as a weighted average of the short-run and long-run responses, with the weight on the long-run coefficients increasing with the share of overall weather variation attributable to cross-sectional (i.e., climatic) differences''\citep[第~1209 页]{merel2021climate}。本节其余内容就是把这句话拆开：权重是什么、由什么决定、偏差朝哪边。
 
 \subsection{线性 long-run effect：偏度机制（式 (3)--(5)）}
