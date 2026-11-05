@@ -9,7 +9,8 @@
 # 用法：
 #   ./build.sh            编译，成功后清理中间文件，保留 main.pdf
 #   ./build.sh --keep     编译但保留中间文件（排查错误用）
-#   ./build.sh --clean    只清理中间文件，不编译
+#   ./build.sh --clean    干净构建：先清理旧中间文件（避免陈旧 aux 干扰），
+#                         再完整编译，成功后再次清理中间文件
 #
 # 编译失败时不清理，保留 main.log 供排查；成功后清理的扩展名与
 # .gitignore 保持一致（另含 bcf / run.xml 两个可能出现的文件）。
@@ -27,9 +28,9 @@ clean() {
 
 case "${1:-}" in
   --clean)
+    # 干净构建：先清旧中间文件，再落到下面的正常编译流程（成功后自动再清理）
     clean
-    echo "已清理编译中间文件"
-    exit 0
+    keep=0
     ;;
   --keep)
     keep=1
@@ -66,6 +67,6 @@ if "${latexmk_cmd[@]}" -xelatex -interaction=nonstopmode -halt-on-error main.tex
     echo "已清理编译中间文件"
   fi
 else
-  echo "编译失败：保留编译中间文件，查 main.log；重编译前可 ./build.sh --clean" >&2
+  echo "编译失败：保留编译中间文件，查 main.log；排查后可用 ./build.sh --clean 干净重建" >&2
   exit 1
 fi

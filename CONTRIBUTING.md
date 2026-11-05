@@ -69,7 +69,7 @@ partinfo 章是活页章，**每落地或大改一章精读，就必须回去维
 - 索引由 imakeidx 自动处理，用默认配置，不要加 `noautomatic`。
 - **`papers/` 不进 Overleaf**（体量与版权）。原文出处一律写 DOI / arXiv 号 / NBER 编号，不写本地 PDF 路径——Overleaf 上看不到本地文件。
 - 必须用图片时放 `figures/<章名>/`，相对路径引用；TikZ 矢量图优先。
-- Overleaf 在线编译仍是提交前的验证手段。本地另备一个最小 `build.sh`（2026-11-04 加）：`bash build.sh` 用 latexmk -xelatex 编译 `main.tex`，成功后自动清理 aux／bbl／blg 等中间文件，只留 `main.pdf`；`--keep` 保留中间文件排查错误，`--clean` 只清理不编译。Windows 注意：PowerShell 里敲 `bash` 进的是 WSL，脚本会自动经 cmd.exe 调用 Windows 侧 MiKTeX，也可改用 Git Bash（`D:\Git\bin\bash.exe`）。旧仓的 `check.sh` 暂不移植。
+- Overleaf 在线编译仍是提交前的验证手段。本地另备一个最小 `build.sh`（2026-11-04 加）：`bash build.sh` 用 latexmk -xelatex 编译 `main.tex`，成功后自动清理 aux／bbl／blg 等中间文件，只留 `main.pdf`；`--keep` 保留中间文件排查错误，`--clean` 干净构建（先清旧中间文件再完整编译，成功后再次清理）。Windows 注意：PowerShell 里敲 `bash` 进的是 WSL，脚本会自动经 cmd.exe 调用 Windows 侧 MiKTeX，也可改用 Git Bash（`D:\Git\bin\bash.exe`）。旧仓的 `check.sh` 暂不移植。
 
 ## 章节体例
 
